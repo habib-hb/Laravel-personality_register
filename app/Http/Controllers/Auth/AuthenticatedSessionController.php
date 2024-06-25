@@ -16,46 +16,36 @@ use Illuminate\Support\Str;
 
 class AuthenticatedSessionController extends Controller
 {
-    /**
-     * Display the login view.
-     */
-
-
 
      // My code starts ***
-        public function redirectToProvider(){
+    public function redirectToProvider(){
+
            return Socialite::driver('github')->redirect();
+           
         }
 
 
 
         // For handling github callback
-        public function handleProviderCallback(){
+    public function handleProviderCallback(){
             $github_user = Socialite::driver('github')->user();
 
-
-
-            // Checking whether the user already exists or not
-            // $user = User::where('github_id', $github_user->id)->first();
-            // if($user){
-            //     Auth::login($user, true);
-        
-            //     return redirect('/');
-            // }
-
-
+            // Identifing or creating user
             $user = User::firstOrCreate([
                 'github_id' => $github_user->id,
             ], 
             
             [
-                'name' => $github_user->getName(),
-                'email' => $github_user->getEmail(),
+                'name' => $github_user->name,
+                'email' => $github_user->email,
                 'password' => bcrypt(Str::random(24)),
+                'github_avatar'=> $github_user->avatar,
             ]);
 
+            // Logging in the user    
             Auth::login($user, true);
 
+            // Redirecting the user to homepage
             return redirect('/');
         }
 

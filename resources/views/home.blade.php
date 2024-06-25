@@ -32,6 +32,19 @@
 
 
 
+        {{-- Avatar Image Checking --}}
+
+                @isset(auth()->user()->github_avatar)
+                    
+                <img src="{{ auth()->user()->github_avatar }}" alt="Github avatar" width="400px">
+
+                @endisset
+    
+
+        {{--  --}}
+
+
+
        @auth
 
                 {{-- When User Is coming from 'Register' Page --}}
