@@ -24,7 +24,7 @@ class AuthenticatedSessionController extends Controller
 
      // My code starts ***
         public function redirectToProvider(){
-            Socialite::driver('github')->redirect();
+           return Socialite::driver('github')->redirect();
         }
 
 
@@ -33,8 +33,10 @@ class AuthenticatedSessionController extends Controller
         public function handleProviderCallback(){
             $github_user = Socialite::driver('github')->user();
 
+            
+
             $user = User::firstOrCreate([
-                'github_id' => $github_user->getId(),
+                'github_id' => $github_user->id,
             ], [
                 'name' => $github_user->getName(),
                 'email' => $github_user->getEmail(),

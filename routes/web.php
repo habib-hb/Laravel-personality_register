@@ -24,15 +24,20 @@ Route::middleware('auth')->group(function () {
 });
 
 
+// *** V1 ***
+// Route::get('/auth/redirect', function(){
+//         return Socialite::driver('github')->redirect();
+// });
+// Route::get('/auth/callback', function(){
+//     $user = Socialite::driver('github')->user();
 
-Route::get('/auth/redirect', function(){
-        return Socialite::driver('github')->redirect();
-});
-Route::get('/auth/callback', function(){
-    $user = Socialite::driver('github')->user();
+//     dd($user);
+// });
 
-    dd($user);
-});
+
+
+Route::get('/auth/redirect', [AuthenticatedSessionController::class, 'redirectToProvider']);
+Route::get('/auth/callback', [AuthenticatedSessionController::class, 'handleProviderCallback']);
 
 
 
