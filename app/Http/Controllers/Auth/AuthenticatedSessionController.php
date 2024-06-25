@@ -33,11 +33,22 @@ class AuthenticatedSessionController extends Controller
         public function handleProviderCallback(){
             $github_user = Socialite::driver('github')->user();
 
-            
+
+
+            // Checking whether the user already exists or not
+            // $user = User::where('github_id', $github_user->id)->first();
+            // if($user){
+            //     Auth::login($user, true);
+        
+            //     return redirect('/');
+            // }
+
 
             $user = User::firstOrCreate([
                 'github_id' => $github_user->id,
-            ], [
+            ], 
+            
+            [
                 'name' => $github_user->getName(),
                 'email' => $github_user->getEmail(),
                 'password' => bcrypt(Str::random(24)),
