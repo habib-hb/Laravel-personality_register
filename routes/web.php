@@ -6,7 +6,8 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use Laravel\Socialite\Facades\Socialite;
 
 Route::get('/', function () {
-    return view('home');
+    $personality = "Router Variable";
+    return view('home' , ['personality' => $personality]);
 })->name('home');
 
 

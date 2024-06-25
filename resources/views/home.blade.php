@@ -34,11 +34,11 @@
 
         {{-- Avatar Image Checking --}}
 
-                @isset(auth()->user()->github_avatar)
+                {{-- @isset(auth()->user()->github_avatar)
                     
                 <img src="{{ auth()->user()->github_avatar }}" alt="Github avatar" width="400px">
 
-                @endisset
+                @endisset --}}
     
 
         {{--  --}}
@@ -51,53 +51,53 @@
 
                 @if(url()->previous() == route('register'))
 
-                        <div class = "flex flex-col items-center mt-[20%]">
+                <div class = "flex flex-col items-center mt-[10vh] md:mt-[10vh]">
 
-                            <h3 id="welcome_text" class="mt-[20%] text-center font-medium text-lg">WoooHooooo!!</h3>
+                    <h3 id="welcome_text" class="mt-[2vh] text-center font-medium text-lg md:mt-[2vh]">WoooHoooo!!</h3>
 
-                            <h2 id="user_name" class="mt-[3%] text-center font-medium text-4xl text-light_mode_blue">{{ auth()->user()->name }}</h2>
+                    <h2 id="user_name" class="mt-[3vh] text-center font-medium text-4xl text-light_mode_blue md:mt-[3vh]">{{ auth()->user()->name }}</h2>
 
-                            <p id="personality_text" class="mt-[4%] text-center font-medium text-lg">Let's open the treasure of `Personality_type` personality :)</p>
+                    <p id="personality_text" class="mt-[4vh] text-center font-medium text-lg md:mt-[4vh]">Let's open the treasure of {{ isset($personality) ? $personality : '`Personality_type`'}} personality :)</p>
 
-                            <a href="/treasure">
+                    <a href="/treasure">
 
-                                <button id="treasure_button" class="mt-[4%] h-12 w-80 rounded-md bg-light_mode_blue text-white">Treasure</button>
+                        <button id="treasure_button" class="mt-[4vh] h-12 w-80 rounded-md bg-light_mode_blue text-white md:mt-[4vh] hover:opacity-90">Treasure</button>
 
-                            </a>
+                    </a>
 
-                            <h4 id="logout_text" class="mt-[4%]">Wanna log out instead? OK</h4>
+                    <h4 id="logout_text" class="mt-[4vh] md:mt-[4vh]">Wanna log out instead? OK</h4>
 
-                            <a id="logout_button" class="mt-[2%] text-light_mode_blue text-lg" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                Log Out
-                            </a>
-                            
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                @csrf
-                            </form>
+                    <a id="logout_button" class="mt-[2vh] text-light_mode_blue text-lg md:mt-[2vh] hover:opacity-75" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        Log Out
+                    </a>
+                    
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
 
-                        </div>
+                </div>  
                         
                 
               {{-- When The user is logged in or used remember key --}}
                  @else
 
-                        <div class = "flex flex-col items-center mt-[20%]">
+                        <div class = "flex flex-col items-center mt-[10vh] md:mt-[10vh]">
 
-                            <h3 id="welcome_text" class="mt-[20%] text-center font-medium text-lg">Welcome Back</h3>
+                            <h3 id="welcome_text" class="mt-[2vh] text-center font-medium text-lg md:mt-[2vh]">Welcome Back</h3>
 
-                            <h2 id="user_name" class="mt-[3%] text-center font-medium text-4xl text-light_mode_blue">{{ auth()->user()->name }}</h2>
+                            <h2 id="user_name" class="mt-[3vh] text-center font-medium text-4xl text-light_mode_blue md:mt-[3vh]">{{ auth()->user()->name }}</h2>
 
-                            <p id="personality_text" class="mt-[4%] text-center font-medium text-lg">Let's open the treasure of `Personality_type` personality :)</p>
+                            <p id="personality_text" class="mt-[4vh] text-center font-medium text-lg md:mt-[4vh]">Let's open the treasure of {{ isset($personality) ? $personality : '`Personality_type`'}} personality :)</p>
 
                             <a href="/treasure">
 
-                                <button id="treasure_button" class="mt-[4%] h-12 w-80 rounded-md bg-light_mode_blue text-white">Treasure</button>
+                                <button id="treasure_button" class="mt-[4vh] h-12 w-80 rounded-md bg-light_mode_blue text-white md:mt-[4vh] hover:opacity-90">Treasure</button>
 
                             </a>
 
-                            <h4 id="logout_text" class="mt-[4%]">Wanna log out instead? OK</h4>
+                            <h4 id="logout_text" class="mt-[4vh] md:mt-[4vh]">Wanna log out instead? OK</h4>
 
-                            <a id="logout_button" class="mt-[2%] text-light_mode_blue text-lg" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            <a id="logout_button" class="mt-[2vh] text-light_mode_blue text-lg md:mt-[2vh] hover:opacity-75" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                 Log Out
                             </a>
                             
@@ -114,27 +114,27 @@
          
                 
        {{-- When The user is not logged in --}}
-       {{-- It's the auth else --}}
+       {{-- It's the auth-else --}}
         @else
 
-            <div class = "flex flex-col items-center mt-[20%]">
+            <div class = "flex flex-col items-center mt-[10vh] md:mt-[10vh]">
 
                 {{-- It's here just for preventing the css class related js error --}}
                 <h3 id="welcome_text" class="mt-[20%] text-center font-medium text-lg hidden">Place Holder</h3>
 
-                <h2 id="user_name" class="mt-[3%] text-center font-medium text-4xl text-light_mode_blue">Welcome</h2>
+                <h2 id="user_name" class="mt-[3vh] text-center font-medium text-4xl text-light_mode_blue md:mt-[3vh]">Welcome</h2>
 
-                <p id="personality_text" class="mt-[4%] text-center font-medium text-lg">Seems like you haven’t Registered yet! Please click the link below to see the magic :)</p>
+                <p id="personality_text" class="mt-[4vh] text-center font-medium text-lg md:mt-[4vh]">Seems like you haven’t Registered yet! Please click the link below to see the magic :)</p>
 
                 <a href="/treasure">
 
-                    <button id="treasure_button" class="mt-[4%] h-12 w-80 rounded-md bg-light_mode_blue text-white">Register</button>
+                    <button id="treasure_button" class="mt-[4vh] h-12 w-80 rounded-md bg-light_mode_blue text-white md:mt-[4vh] hover:opacity-90">Register</button>
 
                 </a>
 
-                <h4 id="logout_text" class="mt-[4%]">Already have an account? Then, please Log In</h4>
+                <h4 id="logout_text" class="mt-[4vh] md:mt-[4vh]">Already have an account? Then, please Log In</h4>
 
-                <a id="logout_button" class="mt-[2%] text-light_mode_blue text-lg" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                <a id="logout_button" class="mt-[2vh] text-light_mode_blue text-lg md:mt-[2vh] hover:opacity-75" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                     Log In
                 </a>
                 
