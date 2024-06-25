@@ -3,8 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
-
-
+use Laravel\Socialite\Facades\Socialite;
 
 Route::get('/', function () {
     return view('home');
@@ -26,8 +25,14 @@ Route::middleware('auth')->group(function () {
 
 
 
-Route::get('/login/github', [AuthenticatedSessionController::class, 'redirectToProvider']);
-Route::get('/callback', [AuthenticatedSessionController::class , 'handleProviderCallback']);
+Route::get('/auth/redirect', function(){
+        return Socialite::driver('github')->redirect();
+});
+Route::get('/auth/callback', function(){
+    $user = Socialite::driver('github')->user();
+
+    dd($user);
+});
 
 
 
