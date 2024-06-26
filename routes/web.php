@@ -18,6 +18,12 @@ Route::get('/dashboard', function () {
 
 
 
+Route::get('/register-user', function(){
+    return view('register-user');
+});
+
+
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
