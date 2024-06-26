@@ -8,18 +8,18 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
 
 class RegisteredUserController extends Controller
 {
-    /**
-     * Display the registration view.
-     */
-    public function create(): View
+    
+    
+public function create(): View
     {
-        return view('auth.register');
+        return view('register-user');
     }
 
     /**
@@ -29,10 +29,12 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
+
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'personality' => ['required', 'numeric'],//my code ***
         ]);
 
         $user = User::create([
@@ -40,6 +42,8 @@ class RegisteredUserController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
+
+        DB::insert('INSERT INTO personality_type_store (user_id, personality_type_identifier_int) VALUES (?, ?)', [$user->id, intval($request->personality)]); // *** note: An error should be programmed for case when intval = 0 in the case of non numeric values.***
 
         event(new Registered($user));
 

@@ -16,6 +16,11 @@ use Illuminate\Support\Str;
 
 class AuthenticatedSessionController extends Controller
 {
+    public function create(): View
+    {
+        return view('login-user');
+    }
+
 
      // My code starts ***
     public function redirectToProvider(){
@@ -50,11 +55,6 @@ class AuthenticatedSessionController extends Controller
         }
 
 
-
-    public function create(): View
-    {
-        return view('auth.login');
-    }
 
     /**
      * Handle an incoming authentication request.

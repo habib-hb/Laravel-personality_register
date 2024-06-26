@@ -50,7 +50,10 @@
 
 
     {{-- Form Starts- 5 inputs (section select with 5 options, name , email, password, confirm password) --}}
-    <form action="" method="post" class="w-full flex flex-col justify-center items-center mt-8 transition-all md:mt-2">
+    <form action="{{ route('register') }}" method="POST" class="w-full flex flex-col justify-center items-center mt-8 transition-all md:mt-2">
+
+        {{-- Cross site request forgery Protection --}}
+        @csrf
 
             {{-- Select Personality Type Input --}}
             <div class="flex flex-col self-center w-full max-w-[90vw] mt-4 md:mt-2 md:max-w-[500px]">
