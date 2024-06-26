@@ -3,12 +3,18 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\HomeController;
+use Illuminate\Support\Facades\DB;
 use Laravel\Socialite\Facades\Socialite;
 
-Route::get('/', function () {
-    $personality = "Router Variable";
-    return view('home' , ['personality' => $personality]);
-})->name('home');
+// Route::get('/', function () {
+//     $personality = "Router Variable";
+//     return view('home' , ['personality' => $personality]);
+// })->name('home');
+
+
+
+Route::get('/', [HomeController::class, 'create'])->name('home');
 
 
 
