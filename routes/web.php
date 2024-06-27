@@ -36,6 +36,12 @@ Route::get('/login-user', function(){
 
 
 
+Route::get('/treasure' , function(){
+    return view('treasure');
+})->name('treasure');
+
+
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
