@@ -15,7 +15,7 @@ class Quoter extends Component
     public function mount(){
         $this->quoteHunter();
 
-        $this->current_quote = $this->database_files[0]->quote;
+        // $this->current_quote = $this->database_files[0]->quote ; // isset($_SESSION['current_quote_int']) ? $this->database_files[$_SESSION['current_quote_int']]->quote : 
     }
 
 

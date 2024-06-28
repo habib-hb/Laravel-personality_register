@@ -37,7 +37,7 @@ Route::get('/dashboard', function () {
 
 
 
-Route::get('/treasure' , [TreasureController::class , 'create'])->name('treasure');
+Route::get('/treasure' , [TreasureController::class , 'create'])->middleware(['auth', 'verified'])->name('treasure');
 
 
 
