@@ -8,24 +8,7 @@
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
-
-
-    <style>
-
-        /* .quote_pc{
-            margin-top: 30vh;
-        }
-
-        @media screen and (max-width: 800px) {
-
-            .quote_pc{
-                margin-top: 40vh;
-            }
-        } */
-
-    </style>
-
-
+    @livewireStyles
 </head>
 
 <body id="body_element" class=" transition-all">
@@ -39,24 +22,12 @@
 
     </nav>
 
-
-
-    {{-- The Inspirational Quote --}}
-    <h2 class="text-white text-center text-[32px] font-normal font-['Inter'] quote_pc mt-[30vh] md:mt-[30vh]">Quote</h2>
-
-    
-
-    {{-- The Repeat Magic Button --}}
-    <div class="flex flex-col justify-center items-center">
-    <button class="bg-[#222222] rounded-lg text-white mt-4 w-[200px] py-1 hover:opacity-90">Repeat The Magic</button>
-    </div>
-
-
-
+    {{-- Livewire Element --}}
+    @livewire('quoter')
 
     </main>
 
 
-
+    @livewireScripts
 </body>
 </html>    
