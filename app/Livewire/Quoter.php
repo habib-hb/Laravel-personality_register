@@ -9,13 +9,14 @@ class Quoter extends Component
 {
     public $database_files = [];
     public $current_quote = "Starter";
+    public $current_session_int;
 
 
     // Initial $current_quote setup
     public function mount(){
         $this->quoteHunter();
 
-        // $this->current_quote = $this->database_files[0]->quote ; // isset($_SESSION['current_quote_int']) ? $this->database_files[$_SESSION['current_quote_int']]->quote : 
+        // $this->current_quote = $this->database_files[0]->quote ; // isset($_SESSION['current_quote_int']) ? $this->database_files[$_SESSION['current_quote_int']]->quote :
     }
 
 
@@ -32,7 +33,7 @@ class Quoter extends Component
 
         session_start();
 
-        isset($_SESSION['current_quote_int']) ? 
+        isset($_SESSION['current_quote_int']) ?
         // When Session Exists
         $_SESSION['current_quote_int'] == 9 ?
         $_SESSION['current_quote_int'] = 0 :
@@ -41,13 +42,15 @@ class Quoter extends Component
          $_SESSION['current_quote_int'] = 0;
 
         $this->current_quote = $this->database_files[$_SESSION['current_quote_int']]->quote;
-        
+
+        $this->current_session_int = $_SESSION['current_quote_int'];
+
     }
 
     public function render()
     {
-        
-        return view('livewire.quoter' , ['current_quote' => $this->current_quote]);
+
+        return view('livewire.quoter' , ['current_quote' => $this->current_quote, 'current_session_int' => $this->current_session_int , 'color' => "red" ]);
 
     }
 }

@@ -29,5 +29,8 @@
 
 
     @livewireScripts
+
+
+
 </body>
-</html>    
+</html>
