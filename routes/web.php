@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\TreasureController;
 use Illuminate\Support\Facades\DB;
 use Laravel\Socialite\Facades\Socialite;
 
@@ -24,21 +25,19 @@ Route::get('/dashboard', function () {
 
 
 
-Route::get('/register-user', function(){
-    return view('register-user');
-});
+// Route::get('/register-user', function(){
+//     return view('register-user');
+// });
 
 
 
-Route::get('/login-user', function(){
-    return view('login-user');
-});
+// Route::get('/login-user', function(){
+//     return view('login-user');
+// });
 
 
 
-Route::get('/treasure' , function(){
-    return view('treasure');
-})->name('treasure');
+Route::get('/treasure' , [TreasureController::class , 'create'])->name('treasure');
 
 
 
