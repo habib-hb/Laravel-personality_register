@@ -79,6 +79,17 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerateToken();
 
+
+
+        // Destroying the session
+        session_start();
+
+        $_SESSION = [];
+
+        session_destroy();
+
+        
+
         return redirect('/');
     }
 }

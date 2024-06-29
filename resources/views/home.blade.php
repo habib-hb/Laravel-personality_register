@@ -32,19 +32,6 @@
 
 
 
-        {{-- Avatar Image Checking --}}
-
-                {{-- @isset(auth()->user()->github_avatar)
-                    
-                <img src="{{ auth()->user()->github_avatar }}" alt="Github avatar" width="400px">
-
-                @endisset --}}
-    
-
-        {{--  --}}
-
-
-
        @auth
 
                 {{-- When User Is coming from 'Register' Page --}}
@@ -126,7 +113,7 @@
 
                 <p id="personality_text" class="mt-[4vh] text-center font-medium text-lg md:mt-[4vh]">Seems like you haven’t Registered yet! Please click the link below to see the magic :)</p>
 
-                <a href="/treasure">
+                <a href="/register">
 
                     <button id="treasure_button" class="mt-[4vh] h-12 w-80 rounded-md bg-light_mode_blue text-white md:mt-[4vh] hover:opacity-90">Register</button>
 
@@ -134,13 +121,9 @@
 
                 <h4 id="logout_text" class="mt-[4vh] md:mt-[4vh]">Already have an account? Then, please Log In</h4>
 
-                <a id="logout_button" class="mt-[2vh] text-light_mode_blue text-lg md:mt-[2vh] hover:opacity-75" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                <a id="logout_button" class="mt-[2vh] text-light_mode_blue text-lg md:mt-[2vh] hover:opacity-75" href="{{ route('login') }}">
                     Log In
                 </a>
-                
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                    @csrf
-                </form>
 
             </div>
 

@@ -14,9 +14,9 @@ class HomeController extends Controller{
 
     public function create(){
         // Extracting personality from DB
-        $personality_query = DB::select('SELECT personality_string FROM users INNER JOIN personality_type_store ON users.id = personality_type_store.user_id INNER JOIN personality_type ON personality_type_store.personality_type_identifier_int = personality_type.identifier_int');
+        $personality_query = DB::select('SELECT personality_string FROM users INNER JOIN personality_type_store ON users.id = personality_type_store.user_id INNER JOIN personality_type ON personality_type_store.personality_type_identifier_int = personality_type.identifier_int WHERE users.id = ?', [auth()?->user()?->id]) ?? null;
 
-        $personality = $personality_query[0]->personality_string;
+        $personality = $personality_query ? $personality_query[0]->personality_string : null;
 
 
         return view('home' , ['personality' => $personality]);
