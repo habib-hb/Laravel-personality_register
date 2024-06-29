@@ -42,7 +42,11 @@
 
         {{-- The Github Button --}}
         <div class="flex flex-col justify-center items-center mt-[4vh]">
-        <img src="{{ asset('files/images/github_button.png') }}" alt="Github logo" class="cursor-pointer hover:opacity-80 w-[94%] md:w-[300px]">
+
+            <a href="auth/redirect">
+                <img src="{{ asset('files/images/github_button.png') }}" alt="Github logo" class="cursor-pointer hover:opacity-80 w-[94%] md:w-[300px]">
+            </a>
+        
         </div>
         {{-- Hr Line --}}
         <hr id="hr_line" class="bg-black mt-[4vh] md:h-[1px]">

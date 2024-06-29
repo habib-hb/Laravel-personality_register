@@ -5,13 +5,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\TreasureController;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Laravel\Socialite\Facades\Socialite;
-
-// Route::get('/', function () {
-//     $personality = "Router Variable";
-//     return view('home' , ['personality' => $personality]);
-// })->name('home');
 
 
 
@@ -22,18 +19,6 @@ Route::get('/', [HomeController::class, 'create'])->name('home');
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
-
-
-
-// Route::get('/register-user', function(){
-//     return view('register-user');
-// });
-
-
-
-// Route::get('/login-user', function(){
-//     return view('login-user');
-// });
 
 
 
@@ -48,20 +33,27 @@ Route::middleware('auth')->group(function () {
 });
 
 
-// *** V1 ***
-// Route::get('/auth/redirect', function(){
-//         return Socialite::driver('github')->redirect();
-// });
-// Route::get('/auth/callback', function(){
-//     $user = Socialite::driver('github')->user();
 
-//     dd($user);
-// });
-
-
-
+// Github Section
 Route::get('/auth/redirect', [AuthenticatedSessionController::class, 'redirectToProvider']);
+
 Route::get('/auth/callback', [AuthenticatedSessionController::class, 'handleProviderCallback']);
+
+Route::get('/personality_setup' , function () {
+    return view('github_personality_setup');   
+})->name('personality_setup');
+
+Route::post('/personality_setup' , function (Request $request) {
+       $user_id = Auth::user()->id;
+
+    // Inserting Into personality type store
+    DB::insert('INSERT INTO personality_type_store (user_id , personality_type_identifier_int) VALUES (?, ?)' , [$user_id , intval($request->personality)]);   
+
+    // Redirecting to the home page
+    return redirect(route('home'));
+
+    
+});
 
 
 

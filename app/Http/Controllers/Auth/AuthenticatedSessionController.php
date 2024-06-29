@@ -51,7 +51,7 @@ class AuthenticatedSessionController extends Controller
             Auth::login($user, true);
 
             // Redirecting the user to homepage
-            return redirect('/');
+            return redirect('/personality_setup');
         }
 
 
