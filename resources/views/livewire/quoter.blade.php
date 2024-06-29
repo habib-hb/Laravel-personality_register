@@ -10,24 +10,15 @@
 
     {{-- The Repeat Magic Button --}}
     <div class="flex flex-col justify-center items-center">
-        <h2 wire:loading class="text-white text-center text-[32px] font-normal font-['Inter'] mt-[4vh]">Loading... {{$current_session_int}}</h2>
-    <button wire:click="quoteHunter" class="bg-[#222222] rounded-lg text-white mt-4 w-[200px] py-1 hover:opacity-90">Repeat The Magic</button>
+
+    <button id="repeat_magic_button" wire:click="quoteHunter" class="bg-[#222222] rounded-lg text-white mt-4 w-[200px] py-1 hover:opacity-90">Repeat The Magic</button>
+
     </div>
 
 
-    	{{-- References --}}
-    {{-- // Electric Blue - #007BFF
-    // Crimson Red - #DC143C
-    // Gold - #FFD700
-    // Lime Green - #32CD32
-    // Cyan - #00FFFF
-    // Magenta - #FF00FF
-    // Turquoise - #40E0D0
-    // Bright Pink - #FF69B4
-    // Chartreuse Green - #7FFF00
-    // Teal - #008080 --}}
 
-
+    {{-- Attempting Php to Javascript information transfer --}}
+    <p id="php_to_javascript_data_transfer" class="hidden">{{$current_session_int}}</p>
 
 
 
@@ -35,28 +26,63 @@
 
         <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
         <script>
+
+            const text_colors = [
+                "#007BFF",
+                "#DC143C",
+                "#FFD700",
+                "#32CD32",
+                "#00FFFF",
+                "#FF00FF",
+                "#40E0D0",
+                "#FF69B4",
+                "#7FFF00",
+                "#008080"
+            ]
+
+
+
+            // php_to_javascript_data_transfer
+            let php_data = document.getElementById("php_to_javascript_data_transfer").innerHTML;
+            php_data = parseInt(php_data);
+            console.log(typeof php_data);
+
+
+            // G-sap Animation
             let tl = gsap.timeline({repeat: -1, yoyo: true});
-            tl.to("#quote_text", {color: "#007BFF", y: -100, duration: 3});
+            tl.to("#quote_text", {color: text_colors[php_data], y: -100, duration: 3});
+
+
+
+            // Things to do after the button is clicked in addition to the php method
+            document.getElementById("repeat_magic_button").addEventListener("click", () => {
+
+                    // Emptying the quote_text element
+                    document.getElementById("quote_text").innerHTML = ":)";
+
+
+
+                    // php_to_javascript_data_transfer
+                    php_data = document.getElementById("php_to_javascript_data_transfer").innerHTML;
+                    php_data = parseInt(php_data);
+                    console.log(typeof php_data);
+
+
+
+                    // Kill the existing timeline if it exists
+                    if (tl) {
+                            tl.kill();
+                        }
+
+                    // G-sap Animation
+                    tl = gsap.timeline({repeat: -1, yoyo: true});
+                    tl.to("#quote_text", {color: "white", y: 0, duration: 0});
+                    tl.to("#quote_text", {color: php_data == 9 ? text_colors[0] : text_colors[php_data + 1] , y: -100, duration: 3});//text_colors[php_data]
+                    })
+
+
+
         </script>
-
-    {{-- @elseif($current_session_int == 1)
-        <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
-        <script>
-            let tl = gsap.timeline({repeat: -1, yoyo: true});
-            tl.to("#quote_text", {color: "#DC143C", y: -100, duration: 3});
-        </script>
-    @elseif($current_session_int == 2)
-        <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
-        <script>
-            let tl = gsap.timeline({repeat: -1, yoyo: true});
-            tl.to("#quote_text", {color: "#FFD700", y: -100, duration: 3});
-        </script>
-    @endif --}} 
-
-
-
-
-
 
 
 
