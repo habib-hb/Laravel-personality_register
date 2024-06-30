@@ -12,7 +12,7 @@
 <body id="body_element" class="bg-light_gray transition-all">
 
     {{-- This main is taking the whole height and containing the whole body --}}
-    <main id="main_element" class="h-[100%] bg-light_gray transition-all"> 
+    <main id="main_element" class="h-[100%] bg-light_gray transition-all">
 
     <nav class="w-full h-[64px] flex flex-col justify-center items-center bg-white " style="box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);">
 
@@ -43,10 +43,10 @@
         {{-- The Github Button --}}
         <div class="flex flex-col justify-center items-center mt-[4vh]">
 
-            <a href="auth/redirect">
+            <a href="auth/redirect" class="cursor-pointer flex flex-col items-center">
                 <img src="{{ asset('files/images/github_button.png') }}" alt="Github logo" class="cursor-pointer hover:opacity-80 w-[94%] md:w-[300px]">
             </a>
-        
+
         </div>
         {{-- Hr Line --}}
         <hr id="hr_line" class="bg-black mt-[4vh] md:h-[1px]">
@@ -103,11 +103,11 @@
 
 
     </main>
-  
-    
+
+
 
     {{-- ******************** Javascript Code ******************** --}}
-    
+
     <script>
         // Dark Mode Toggler By Clicking On The Icon
         document.querySelector('#dark_mode_toggle_button').addEventListener('click', ()=>{
@@ -208,7 +208,7 @@
                 document.getElementById('submit_button').classList.toggle('bg-dark_mode_blue');
                 document.getElementById('submit_button').classList.toggle('bg-light_mode_blue');
 
-          
+
 
                 // // Personality text dark mode
                 // document.getElementById('personality_text').classList.toggle('text-white');
@@ -242,4 +242,3 @@
 
 </body>
 </html>
-            

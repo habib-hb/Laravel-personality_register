@@ -42,7 +42,11 @@
 
         {{-- The Github Button --}}
         <div class="flex flex-col justify-center items-center mt-[4vh]">
-            <img src="{{ asset('files/images/github_button.png') }}" alt="Github logo" class="cursor-pointer hover:opacity-80 w-[94%] md:w-[300px]">
+
+            <a href="auth/redirect" class="cursor-pointer flex flex-col items-center">
+                <img src="{{ asset('files/images/github_button.png') }}" alt="Github logo" class="cursor-pointer hover:opacity-80 w-[94%] md:w-[300px]">
+            </a>
+
         </div>
         {{-- Hr Line --}}
         <hr id="hr_line" class="bg-black mt-[4vh] md:h-[1px]">
@@ -51,7 +55,7 @@
 
     {{-- Form Starts- 5 inputs (section select with 5 options, name , email, password, confirm password) --}}
     <form action="{{ route('login') }}" method="POST" class="w-full flex flex-col justify-center items-center mt-8 transition-all md:mt-2">
-        	
+
         {{-- CSRF Protected --}}
         @csrf
             {{-- Email input --}}
@@ -74,11 +78,11 @@
 
 
     </main>
-  
-    
+
+
 
     {{-- ******************** Javascript Code ******************** --}}
-    
+
     <script>
         // Dark Mode Toggler By Clicking On The Icon
         document.querySelector('#dark_mode_toggle_button').addEventListener('click', ()=>{
@@ -152,7 +156,7 @@
                 document.getElementById('submit_button').classList.toggle('bg-dark_mode_blue');
                 document.getElementById('submit_button').classList.toggle('bg-light_mode_blue');
 
-          
+
 
                 // // Personality text dark mode
                 // document.getElementById('personality_text').classList.toggle('text-white');
