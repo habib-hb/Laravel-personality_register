@@ -8,11 +8,13 @@ use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\View\View;
 use Laravel\Socialite\Facades\Socialite;
 
 use Illuminate\Support\Str;
-
+use PDO;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -31,19 +33,75 @@ class AuthenticatedSessionController extends Controller
 
 
 
-        // For handling github callback
+    // For handling github callback
     public function handleProviderCallback(){
+
             $github_user = Socialite::driver('github')->user();
 
 
 
-            // Checking if user exists in the database
-            
+            // Logging informations about the process to the storage/logs/laravel.log file
+            DB::listen(function ($query) {
+                Log::info($query->sql, $query->bindings);
+            });
 
 
 
-            // Identifing or creating user
-            $user = User::firstOrCreate([
+            // *** Laravel DB method didn't work, thus I had to use PDO ***
+              // Database configuration
+            $host = '127.0.0.1';
+            $db = 'personality_register';
+            $user = 'root';
+            $pass = '';
+            // $charset = 'utf8mb4';
+
+            $dsn = "mysql:host=$host;dbname=$db;";
+            $options = [
+                PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+                PDO::ATTR_EMULATE_PREPARES   => false,
+            ];
+
+            try {
+                // Create a new PDO instance
+                $pdo = new PDO($dsn, $user, $pass, $options);
+            } catch (\PDOException $e) {
+                // Handle connection error
+                throw new \PDOException($e->getMessage(), (int)$e->getCode());
+            }
+
+            // User email to check
+            $userEmail = $github_user->email;
+
+            // Prepare the SQL statement to check if user exists
+            $sql = 'SELECT * FROM users WHERE email = :email LIMIT 1';
+            $stmt = $pdo->prepare($sql);
+
+            // Bind the email parameter
+            $stmt->bindParam(':email', $userEmail, PDO::PARAM_STR);
+
+            // Execute the query
+            $stmt->execute();
+
+            // Fetch the result
+            $existing_user_check = $stmt->fetch();
+
+            if ($existing_user_check) {
+
+                // User exists, now log In the user using github_user id
+                // Log in the user using the id
+                Auth::loginUsingId($existing_user_check['id'], true);
+
+                // Redirecting To Home Page
+                return redirect('/');
+
+            }
+            // ======================
+
+
+
+    // Identifing or creating user
+    $user = User::firstOrCreate([
                 'github_id' => $github_user->id,
             ],
 
@@ -57,7 +115,7 @@ class AuthenticatedSessionController extends Controller
             // Logging in the user
             Auth::login($user, true);
 
-            // Redirecting the user to homepage
+            // Redirecting the user to input personality type value
             return redirect('/personality_setup');
         }
 
