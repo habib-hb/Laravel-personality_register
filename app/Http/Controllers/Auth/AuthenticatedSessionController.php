@@ -26,7 +26,7 @@ class AuthenticatedSessionController extends Controller
     public function redirectToProvider(){
 
            return Socialite::driver('github')->redirect();
-           
+
         }
 
 
@@ -35,11 +35,18 @@ class AuthenticatedSessionController extends Controller
     public function handleProviderCallback(){
             $github_user = Socialite::driver('github')->user();
 
+
+
+            // Checking if user exists in the database
+            
+
+
+
             // Identifing or creating user
             $user = User::firstOrCreate([
                 'github_id' => $github_user->id,
-            ], 
-            
+            ],
+
             [
                 'name' => $github_user->name,
                 'email' => $github_user->email,
@@ -47,7 +54,7 @@ class AuthenticatedSessionController extends Controller
                 'github_avatar'=> $github_user->avatar,
             ]);
 
-            // Logging in the user    
+            // Logging in the user
             Auth::login($user, true);
 
             // Redirecting the user to homepage
@@ -88,7 +95,7 @@ class AuthenticatedSessionController extends Controller
 
         session_destroy();
 
-        
+
 
         return redirect('/');
     }

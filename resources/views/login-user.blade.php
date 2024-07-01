@@ -14,7 +14,7 @@
     {{-- This main is taking the whole height and containing the whole body --}}
     <main id="main_element" class="h-[100%] bg-light_gray transition-all">
 
-    <nav class="w-full h-[64px] flex flex-col justify-center items-center bg-white " style="box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);">
+    <nav class="w-full h-[64px] flex flex-col justify-center items-center bg-slate-50 " style="box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);">
 
         <img id="light_mode_logo" class="cursor-pointer" src="{{ asset('files/images/light_mode_logo.png') }}" width="88px" alt="Pic">
 
@@ -112,7 +112,7 @@
 
 
                 // Nav element dark mode
-                document.querySelector('nav').classList.toggle('bg-white');
+                document.querySelector('nav').classList.toggle('bg-slate-50');
                 document.querySelector('nav').classList.toggle('bg-dark_gray');
 
 

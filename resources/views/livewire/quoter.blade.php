@@ -4,7 +4,7 @@
 
 
     {{-- The Inspirational Quote --}}
-    <h2 id="quote_text" class="text-white text-center text-[32px] font-normal font-['Inter'] quote_pc mt-[30vh] md:mt-[30vh]">{{$current_quote}}</h2>
+    <h2 id="quote_text" class="text-white text-center text-[32px] font-normal font-['Inter'] quote_pc mt-[30vh] md:mt-[30vh] px-4">{{$current_quote}}</h2>
 
 
 

@@ -10,9 +10,9 @@
 
 </head>
 <body>
-    <main id="main_element" class="h-[100vh] bg-light_gray transition-all"> 
+    <main id="main_element" class="h-[100vh] bg-light_gray transition-all">
 
-    <nav class="w-full h-[64px] flex flex-col justify-center items-center bg-white " style="box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);">
+    <nav class="w-full h-[64px] flex flex-col justify-center items-center bg-slate-50 " style="box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);">
 
         <img id="light_mode_logo" class="cursor-pointer" src="{{ asset('files/images/light_mode_logo.png') }}" width="88px" alt="Pic">
 
@@ -44,7 +44,7 @@
 
                     <h2 id="user_name" class="mt-[3vh] text-center font-medium text-4xl text-light_mode_blue md:mt-[3vh]">{{ auth()->user()->name }}</h2>
 
-                    <p id="personality_text" class="mt-[4vh] text-center font-medium text-lg md:mt-[4vh]">Let's open the treasure of {{ isset($personality) ? $personality : '`Personality_type`'}} personality :)</p>
+                    <p id="personality_text" class="mt-[4vh] text-center font-medium text-lg md:mt-[4vh] px-4">Let's open the treasure of {{ isset($personality) ? $personality : '`Personality_type`'}} personality :)</p>
 
                     <a href="/treasure">
 
@@ -57,14 +57,14 @@
                     <a id="logout_button" class="mt-[2vh] text-light_mode_blue text-lg md:mt-[2vh] hover:opacity-75" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                         Log Out
                     </a>
-                    
+
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                         @csrf
                     </form>
 
-                </div>  
-                        
-                
+                </div>
+
+
               {{-- When The user is logged in or used remember key --}}
                  @else
 
@@ -74,7 +74,7 @@
 
                             <h2 id="user_name" class="mt-[3vh] text-center font-medium text-4xl text-light_mode_blue md:mt-[3vh]">{{ auth()->user()->name }}</h2>
 
-                            <p id="personality_text" class="mt-[4vh] text-center font-medium text-lg md:mt-[4vh]">Let's open the treasure of {{ isset($personality) ? $personality : '`Personality_type`'}} personality :)</p>
+                            <p id="personality_text" class="mt-[4vh] text-center font-medium text-lg md:mt-[4vh] px-4">Let's open the treasure of {{ isset($personality) ? $personality : '`Personality_type`'}} personality :)</p>
 
                             <a href="/treasure">
 
@@ -87,19 +87,19 @@
                             <a id="logout_button" class="mt-[2vh] text-light_mode_blue text-lg md:mt-[2vh] hover:opacity-75" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                 Log Out
                             </a>
-                            
+
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                 @csrf
                             </form>
 
-                        </div>  
-                
-            
+                        </div>
+
+
 
                 @endif
-         
-         
-                
+
+
+
        {{-- When The user is not logged in --}}
        {{-- It's the auth-else --}}
         @else
@@ -111,7 +111,7 @@
 
                 <h2 id="user_name" class="mt-[3vh] text-center font-medium text-4xl text-light_mode_blue md:mt-[3vh]">Welcome</h2>
 
-                <p id="personality_text" class="mt-[4vh] text-center font-medium text-lg md:mt-[4vh]">Seems like you haven’t Registered yet! Please click the link below to see the magic :)</p>
+                <p id="personality_text" class="mt-[4vh] text-center font-medium text-lg md:mt-[4vh] px-4">Seems like you haven’t Registered yet! Please click the link below to see the magic :)</p>
 
                 <a href="/register">
 
@@ -132,7 +132,7 @@
 
 
     </main>
-    
+
 
 
     <script>
@@ -157,7 +157,7 @@
 
 
                     // Nav element dark mode
-                    document.querySelector('nav').classList.toggle('bg-white');
+                    document.querySelector('nav').classList.toggle('bg-slate-50');
                     document.querySelector('nav').classList.toggle('bg-dark_gray');
 
 
