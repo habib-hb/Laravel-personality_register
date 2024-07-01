@@ -49,7 +49,7 @@
 
         </div>
         {{-- Hr Line --}}
-        <hr id="hr_line" class="bg-black mt-[4vh] md:h-[1px]">
+        <hr id="hr_line" class="bg-black mt-[4vh] md:h-[2px]">
 
 
 
