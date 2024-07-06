@@ -58,17 +58,24 @@
 
         {{-- CSRF Protected --}}
         @csrf
+
             {{-- Email input --}}
             <div class="flex flex-col self-center w-full max-w-[90vw] mt-4 md:mt-2 md:max-w-[500px]">
                 <label id="email_input_label" for="email" class="text-left">Email:</label>
             </div>
             <input type="email" id="email_input" name="email" class="w-[90vw] border-none rounded-md md:mt-2 md:max-w-[500px]">
+            @error('email')
+            <span class="text-red-500 text-sm">{{ $message }}</span>
+            @enderror
 
             {{-- Password input --}}
             <div class="flex flex-col self-center w-full max-w-[90vw] mt-4 md:mt-2 md:max-w-[500px]">
                 <label id="password_input_label" for="password" class="text-left">Password:</label>
             </div>
             <input type="password" id="password_input" name="password" class="w-[90vw] border-none rounded-md md:mt-2 md:max-w-[500px]">
+            @error('password')
+            <span class="text-red-500 text-sm">{{ $message }}</span>
+            @enderror
 
             {{-- Log In button --}}
             <input type="submit" id="submit_button" value="Log In" class="mt-[4vh] mb-[4vh] h-12 w-[90%] rounded-md bg-light_mode_blue text-white hover:opacity-90 text-xl md:max-w-[350px] md:mb-[12vh]">
