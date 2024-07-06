@@ -40,19 +40,30 @@ Route::get('/auth/redirect', [AuthenticatedSessionController::class, 'redirectTo
 Route::get('/auth/callback', [AuthenticatedSessionController::class, 'handleProviderCallback']);
 
 Route::get('/personality_setup' , function () {
-    return view('github_personality_setup');   
+    return view('github_personality_setup');
 })->name('personality_setup');
 
 Route::post('/personality_setup' , function (Request $request) {
        $user_id = Auth::user()->id;
 
     // Inserting Into personality type store
-    DB::insert('INSERT INTO personality_type_store (user_id , personality_type_identifier_int) VALUES (?, ?)' , [$user_id , intval($request->personality)]);   
+    DB::insert('INSERT INTO personality_type_store (user_id , personality_type_identifier_int) VALUES (?, ?)' , [$user_id , intval($request->personality)]);
 
     // Redirecting to the home page
     return redirect(route('home'));
 
-    
+
+});
+
+
+Route::get('/get_user_name', function(){
+
+    // Getting the image path
+    $image_path = public_path('images/picture.png');
+
+    // Sending the image as response
+    return response()->file($image_path);
+
 });
 
 
