@@ -70,33 +70,54 @@
                 <option id="option-4" value="4" class="text-black">Conscientiousness</option>
                 <option id="option-5" value="5" class="text-black">Neuroticism</option>
             </select>
+            @error('personality')
+            <span class="text-red-500 text-sm">{{ $message }}</span>
+            @enderror
 
             {{-- Name input --}}
             <div class="flex flex-col self-center w-full max-w-[90vw] mt-4 md:max-w-[500px]">
                 <label id="name_input_label" for="name" class="text-left">Name:</label>
             </div>
             <input type="text" id="name_input" name="name" class="w-[90vw] border-none rounded-md md:max-w-[500px]">
+            @error('name')
+            <span class="text-red-500 text-sm">{{ $message }}</span>
+            @enderror
 
             {{-- Email input --}}
             <div class="flex flex-col self-center w-full max-w-[90vw] mt-4 md:max-w-[500px]">
                 <label id="email_input_label" for="email" class="text-left">Email:</label>
             </div>
             <input type="email" id="email_input" name="email" class="w-[90vw] border-none rounded-md md:max-w-[500px]">
+            @error('email')
+            <span class="text-red-500 text-sm">{{ $message }}</span>
+            @enderror
 
             {{-- Password input --}}
             <div class="flex flex-col self-center w-full max-w-[90vw] mt-4 md:max-w-[500px]">
                 <label id="password_input_label" for="password" class="text-left">Password:</label>
             </div>
             <input type="password" id="password_input" name="password" class="w-[90vw] border-none rounded-md md:max-w-[500px]">
+            @error('password')
+            <span class="text-red-500 text-sm">{{ $message }}</span>
+            @enderror
 
             {{-- Confirm Password input --}}
             <div class="flex flex-col self-center w-full max-w-[90vw] mt-4 md:max-w-[500px]">
                 <label id="confirm_password_input_label" for="password_confirmation" class="text-left">Confirm Password:</label>
             </div>
             <input type="password" id="confirm_password_input" name="password_confirmation" class="w-[90vw] border-none rounded-md md:max-w-[500px]">
+            @error('password_confirmation')
+            <span class="text-red-500 text-sm">{{ $message }}</span>
+            @enderror
 
             {{-- Submit button --}}
             <input type="submit" id="submit_button" value="Register" class="mt-[4vh] mb-[4vh] h-12 w-[90%] rounded-md bg-light_mode_blue text-white hover:opacity-90 text-xl md:max-w-[350px] md:mb-[12vh]">
+
+            @if ($errors->any())
+            <div class="text-red-500 text-sm">
+            {{ $errors->first() }}
+            </div>
+            @endif
 
         </form>
 

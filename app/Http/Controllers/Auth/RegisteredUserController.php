@@ -15,8 +15,8 @@ use Illuminate\View\View;
 
 class RegisteredUserController extends Controller
 {
-    
-    
+
+
 public function create(): View
     {
         return view('register-user');
@@ -36,6 +36,8 @@ public function create(): View
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'personality' => ['required', 'numeric'],//my code ***
         ]);
+
+        
 
         $user = User::create([
             'name' => $request->name,
