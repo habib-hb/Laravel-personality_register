@@ -54,8 +54,8 @@
                 <div class="flex flex-col self-center w-full max-w-[90vw] mt-4 md:max-w-[500px]">
                     <label id="quote_input_label" for="name" class="text-left">New Quote:</label>
                 </div>
-                <input type="text" id="quote_input" name="name" class="w-[90vw] border-none rounded-md md:max-w-[500px]">
-                @error('name')
+                <input type="text" id="quote_input" name="quote_input" class="w-[90vw] border-none rounded-md md:max-w-[500px]">
+                @error('quote_input')
                 <span class="text-red-500 text-sm">{{ $message }}</span>
                 @enderror
 
