@@ -18,7 +18,7 @@
 
 
     {{-- Attempting Php to Javascript information transfer --}}
-    <p id="php_to_javascript_data_transfer" class="hidden">{{$current_session_int}}</p>
+    <p id="php_to_javascript_data_transfer" class="hidden">{{$total_quotes}}</p>
 
 
 
@@ -43,19 +43,22 @@
 
 
             // php_to_javascript_data_transfer
-            let php_data = document.getElementById("php_to_javascript_data_transfer").innerHTML;
-            php_data = parseInt(php_data);
-            console.log(typeof php_data);
+            let php_data_total_quotes = document.getElementById("php_to_javascript_data_transfer").innerHTML;
+            php_data_total_quotes = parseInt(php_data_total_quotes);
+            console.log(typeof php_data_total_quotes);
 
 
             // G-sap Animation
             let tl = gsap.timeline({repeat: -1, yoyo: true});
-            tl.to("#quote_text", {color: text_colors[php_data], y: -100, duration: 3});
+            tl.to("#quote_text", {color: text_colors[0], y: -100, duration: 3});
 
 
 
             // Things to do after the button is clicked in addition to the php method
+            let clickCount = 0;
             document.getElementById("repeat_magic_button").addEventListener("click", () => {
+
+                    clickCount++;
 
                     // Emptying the quote_text element
                     document.getElementById("quote_text").innerHTML = ":)";
@@ -63,9 +66,9 @@
 
 
                     // php_to_javascript_data_transfer
-                    php_data = document.getElementById("php_to_javascript_data_transfer").innerHTML;
-                    php_data = parseInt(php_data);
-                    console.log(typeof php_data);
+                    // php_data = document.getElementById("php_to_javascript_data_transfer").innerHTML;
+                    // php_data = parseInt(php_data);
+                    // console.log(typeof php_data);
 
 
 
@@ -77,7 +80,13 @@
                     // G-sap Animation
                     tl = gsap.timeline({repeat: -1, yoyo: true});
                     tl.to("#quote_text", {color: "white", y: 0, duration: 0});
-                    tl.to("#quote_text", {color: php_data == 9 ? text_colors[0] : text_colors[php_data + 1] , y: -100, duration: 3});//text_colors[php_data]
+                    tl.to("#quote_text", {color: clickCount == 10 ? text_colors[0] : text_colors[clickCount] , y: -100, duration: 3});//text_colors[php_data]
+
+                    // Resetting the clickCount
+                    if (clickCount == 10) {
+                            clickCount = 0;
+                        }
+
                     })
 
 

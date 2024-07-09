@@ -35,9 +35,9 @@ class Quoter extends Component
 
         isset($_SESSION['current_quote_int']) ?
         // When Session Exists
-        $_SESSION['current_quote_int'] == 9 ?
+        $_SESSION['current_quote_int'] == count($this->database_files) - 1 ?
         $_SESSION['current_quote_int'] = 0 :
-        $_SESSION['current_quote_int'] += 1 :
+        $_SESSION['current_quote_int'] += 1 : // This (:) is the else block sign for the very first ? condition
         // When Session Does Not Exist
          $_SESSION['current_quote_int'] = 0;
 
@@ -50,7 +50,7 @@ class Quoter extends Component
     public function render()
     {
 
-        return view('livewire.quoter' , ['current_quote' => $this->current_quote, 'current_session_int' => $this->current_session_int , 'color' => "red" ]);
+        return view('livewire.quoter' , ['current_quote' => $this->current_quote, 'current_session_int' => $this->current_session_int , 'total_quotes' => count($this->database_files) ]);
 
     }
 }

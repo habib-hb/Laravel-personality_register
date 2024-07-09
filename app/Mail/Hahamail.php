@@ -27,7 +27,7 @@ class Hahamail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            // from: new Address('jeffrey@example.com', 'Jeffrey Way'),
+            from: new Address('780c56001@smtp-brevo.com', 'Habib-hb'),
             subject: 'Hahamail',
         );
     }
@@ -37,7 +37,7 @@ class Hahamail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'view.name',
+            view: 'email.send-email',
         );
     }
 
