@@ -65,13 +65,6 @@
 
 
 
-                    // php_to_javascript_data_transfer
-                    // php_data = document.getElementById("php_to_javascript_data_transfer").innerHTML;
-                    // php_data = parseInt(php_data);
-                    // console.log(typeof php_data);
-
-
-
                     // Kill the existing timeline if it exists
                     if (tl) {
                             tl.kill();
