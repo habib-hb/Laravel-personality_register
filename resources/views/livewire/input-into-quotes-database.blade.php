@@ -30,7 +30,7 @@
 
 
         {{-- Form Starts- 5 inputs (section select with 5 options, name , email, password, confirm password) --}}
-        <form action="{{ route('register') }}" method="POST" class="w-full flex flex-col justify-center items-center mt-8 transition-all md:mt-2">
+        <form action="{{ route('input-quotes-post') }}" method="POST" class="w-full flex flex-col justify-center items-center mt-8 transition-all md:mt-2">
 
             {{-- Cross site request forgery Protection --}}
             @csrf
@@ -71,6 +71,15 @@
                 @endif
 
             </form>
+
+
+            {{-- Success Message --}}
+            @if(session('success'))
+
+            <h2 id="first_message" class="text-light_mode_blue text-center text-[16px] font-normal font-['Inter'] mt-[4vh]">{{ session('success') }}
+            </h2>
+
+            @endif
 
 
 
