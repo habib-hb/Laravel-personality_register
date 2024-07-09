@@ -112,4 +112,13 @@ Route::get('send-mail', function () {
 });
 
 
+
+// Input into quotes database - route setup
+Route::get('/input-quotes' , function () {
+
+    return view('database_input.quotes');
+
+});
+
+
 require __DIR__.'/auth.php';
