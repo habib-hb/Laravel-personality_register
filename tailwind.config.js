@@ -20,7 +20,8 @@ export default {
                 light_mode_blue: '#0B396F',
                 dark_mode_blue: '#1A579F',
                 input_dark_mode: '#2C2C2C',
-                light_mode_red: '#6E170B'
+                light_mode_red: '#6E170B',
+                dark_mode_red: '#971C0B'
             }
         },
     },

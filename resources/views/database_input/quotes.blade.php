@@ -50,33 +50,57 @@
 
 
         {{-- The Quote List --}}
-        <h2 class="text-light_mode_blue text-center text-[24px] font-normal font-['Inter'] mb-[2vh]">Quote List</h2>
+        <h2 id="quote_list_title" class="text-light_mode_blue text-center text-[24px] font-normal font-['Inter'] mb-[2vh]">Quote List</h2>
+
         <div class="flex flex-col gap-4 justify-center items-center mb-4">
 
-            <div class="quote_list_element_body w-[90vw] h-[20vh] bg-zinc-100 rounded-lg relative p-5">
-                <div class="text-center text-black text-xl font-normal mb-5">The quote Lorem Ipsum dada dada dafdsf fdsf fsdfdsf</div>
-                <div class="flex justify-between">
-                    <button class="w-[35vw] h-[6vh] bg-light_mode_blue rounded-lg text-white text-xl font-normal flex items-center justify-center">Edit</button>
-                    <button class="w-[35vw] h-[6vh] bg-light_mode_red rounded-lg text-white text-xl font-normal flex items-center justify-center">Delete</button>
-                </div>
-            </div>
 
 
             <div class="quote_list_element_body w-[90vw] h-[20vh] bg-zinc-100 rounded-lg relative p-5">
-                <div class="text-center text-black text-xl font-normal mb-5">The quote Lorem Ipsum dada dada dafdsf fdsf fsdfdsf</div>
+
+                <div class="quote_list_element_text text-center text-black text-xl font-normal mb-5">The quote Lorem Ipsum dada dada dafdsf fdsf fsdfdsf</div>
+
                 <div class="flex justify-between">
-                    <button class="w-[35vw] h-[6vh] bg-light_mode_blue rounded-lg text-white text-xl font-normal flex items-center justify-center">Edit</button>
-                    <button class="w-[35vw] h-[6vh] bg-light_mode_red rounded-lg text-white text-xl font-normal flex items-center justify-center">Delete</button>
+                    <button class="quote_list_element_edit_button w-[35vw] h-[6vh] bg-light_mode_blue rounded-lg text-white text-xl font-normal flex items-center justify-center">Edit</button>
+
+                    <button class="quote_list_element_delete_button w-[35vw] h-[6vh] bg-light_mode_red rounded-lg text-white text-xl font-normal flex items-center justify-center">Delete</button>
+
                 </div>
+
             </div>
 
+
+
             <div class="quote_list_element_body w-[90vw] h-[20vh] bg-zinc-100 rounded-lg relative p-5">
-                <div class="text-center text-black text-xl font-normal mb-5">The quote Lorem Ipsum dada dada dafdsf fdsf fsdfdsf</div>
+
+                <div class="quote_list_element_text text-center text-black text-xl font-normal mb-5">The quote Lorem Ipsum dada dada dafdsf fdsf fsdfdsf</div>
+
                 <div class="flex justify-between">
-                    <button class="w-[35vw] h-[6vh] bg-light_mode_blue rounded-lg text-white text-xl font-normal flex items-center justify-center">Edit</button>
-                    <button class="w-[35vw] h-[6vh] bg-light_mode_red rounded-lg text-white text-xl font-normal flex items-center justify-center">Delete</button>
+
+                    <button class="quote_list_element_edit_button w-[35vw] h-[6vh] bg-light_mode_blue rounded-lg text-white text-xl font-normal flex items-center justify-center">Edit</button>
+
+                    <button class="quote_list_element_delete_button w-[35vw] h-[6vh] bg-light_mode_red rounded-lg text-white text-xl font-normal flex items-center justify-center">Delete</button>
+
                 </div>
+
             </div>
+
+
+
+            <div class="quote_list_element_body w-[90vw] h-[20vh] bg-zinc-100 rounded-lg relative p-5">
+
+                <div class="quote_list_element_text text-center text-black text-xl font-normal mb-5">The quote Lorem Ipsum dada dada dafdsf fdsf fsdfdsf</div>
+
+                <div class="flex justify-between">
+
+                    <button class="quote_list_element_edit_button w-[35vw] h-[6vh] bg-light_mode_blue rounded-lg text-white text-xl font-normal flex items-center justify-center">Edit</button>
+
+                    <button class="quote_list_element_delete_button w-[35vw] h-[6vh] bg-light_mode_red rounded-lg text-white text-xl font-normal flex items-center justify-center">Delete</button>
+
+                </div>
+
+            </div>
+
 
 
         </div>
@@ -181,6 +205,35 @@
                     // Submit button dark mode
                     document.getElementById('submit_button').classList.toggle('bg-dark_mode_blue');
                     document.getElementById('submit_button').classList.toggle('bg-light_mode_blue');
+
+                    // Quote List element section dark mode
+                         // Query List title
+                         document.getElementById('quote_list_title').classList.toggle('text-light_mode_blue');
+                         document.getElementById('quote_list_title').classList.toggle('text-dark_mode_blue');
+
+                         // query_list_element_body
+                         document.querySelectorAll('.quote_list_element_body').forEach(function(element) {
+                             element.classList.toggle('bg-zinc-100');
+                             element.classList.toggle('bg-input_dark_mode');
+                         });
+
+                         // query_list_element_text
+                         document.querySelectorAll('.quote_list_element_text').forEach(function(element) {
+                             element.classList.toggle('text-white');
+                             element.classList.toggle('text-black');
+                         });
+
+                         // query_list_element_edit_button
+                         document.querySelectorAll('.quote_list_element_edit_button').forEach(function(element) {
+                             element.classList.toggle('bg-dark_mode_blue');
+                             element.classList.toggle('bg-light_mode_blue');
+                         });
+
+                         // query_list_element_delete_button
+                         document.querySelectorAll('.quote_list_element_delete_button').forEach(function(element) {
+                             element.classList.toggle('bg-light_mode_red');
+                             element.classList.toggle('bg-dark_mode_red');
+                         });
 
 
 
