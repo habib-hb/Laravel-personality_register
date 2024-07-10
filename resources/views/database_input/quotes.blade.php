@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quotes Input</title>
+    {{-- <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap" /> --}}
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
@@ -44,6 +45,44 @@
 
 
               @livewire('input-into-quotes-database')
+
+
+
+
+        {{-- The Quote List --}}
+        <h2 class="text-light_mode_blue text-center text-[24px] font-normal font-['Inter'] mb-[2vh]">Quote List</h2>
+        <div class="flex flex-col gap-4 justify-center items-center mb-4">
+
+            <div class="quote_list_element_body w-[90vw] h-[20vh] bg-zinc-100 rounded-lg relative p-5">
+                <div class="text-center text-black text-xl font-normal mb-5">The quote Lorem Ipsum dada dada dafdsf fdsf fsdfdsf</div>
+                <div class="flex justify-between">
+                    <button class="w-[35vw] h-[6vh] bg-light_mode_blue rounded-lg text-white text-xl font-normal flex items-center justify-center">Edit</button>
+                    <button class="w-[35vw] h-[6vh] bg-light_mode_red rounded-lg text-white text-xl font-normal flex items-center justify-center">Delete</button>
+                </div>
+            </div>
+
+
+            <div class="quote_list_element_body w-[90vw] h-[20vh] bg-zinc-100 rounded-lg relative p-5">
+                <div class="text-center text-black text-xl font-normal mb-5">The quote Lorem Ipsum dada dada dafdsf fdsf fsdfdsf</div>
+                <div class="flex justify-between">
+                    <button class="w-[35vw] h-[6vh] bg-light_mode_blue rounded-lg text-white text-xl font-normal flex items-center justify-center">Edit</button>
+                    <button class="w-[35vw] h-[6vh] bg-light_mode_red rounded-lg text-white text-xl font-normal flex items-center justify-center">Delete</button>
+                </div>
+            </div>
+
+            <div class="quote_list_element_body w-[90vw] h-[20vh] bg-zinc-100 rounded-lg relative p-5">
+                <div class="text-center text-black text-xl font-normal mb-5">The quote Lorem Ipsum dada dada dafdsf fdsf fsdfdsf</div>
+                <div class="flex justify-between">
+                    <button class="w-[35vw] h-[6vh] bg-light_mode_blue rounded-lg text-white text-xl font-normal flex items-center justify-center">Edit</button>
+                    <button class="w-[35vw] h-[6vh] bg-light_mode_red rounded-lg text-white text-xl font-normal flex items-center justify-center">Delete</button>
+                </div>
+            </div>
+
+
+        </div>
+
+
+
 
 
 
