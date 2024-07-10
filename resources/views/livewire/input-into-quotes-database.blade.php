@@ -71,7 +71,7 @@
 
                     <div class="flex justify-between">
 
-                        <button class="quote_list_element_edit_button w-[35vw] h-[6vh] bg-light_mode_blue rounded-lg text-white text-xl font-normal flex items-center justify-center" onclick="editQuote({{$quote->id}})">Edit</button>
+                        <button class="quote_list_element_edit_button w-[35vw] h-[6vh] bg-light_mode_blue rounded-lg text-white text-xl font-normal flex items-center justify-center" onclick="editQuote({{$quote->id}} , `{{$quote->quote}}`)">Edit</button> 
 
                         <button class="quote_list_element_delete_button w-[35vw] h-[6vh] bg-light_mode_red rounded-lg text-white text-xl font-normal flex items-center justify-center" wire:click="deleteQuote({{$quote->id}})">Delete</button>
 
@@ -86,7 +86,7 @@
 
 
 
-          {{-- Testing HTML --}}
+          {{-- Pop-Up HTML --}}
           <button id="openPopupBtn" class="px-4 py-2 bg-blue-500 text-white rounded">Open Edit Form</button>
 
           <div id="popup" class="fixed inset-0 items-center justify-center bg-black bg-opacity-80 hidden z-50">
@@ -100,8 +100,8 @@
                   <form id="editForm" class="space-y-4 flex flex-col w-full items-center justify-center">
 
                       <div class="w-full">
-                          <label for="quote_edit_input" id="quote_edit_input_label" class="block text-sm font-medium text-gray-700">Name:</label>
-                          <input type="text" id="quote_edit_input" name="quote_edit_input" required class="mt-1 p-2 block w-full border bg-white border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+                          <label for="quote_edit_input" id="quote_edit_input_label" class="block text-sm font-medium text-gray-700">Quote:</label>
+                          <input type="text" id="quote_edit_input" name="quote_edit_input" required class="mt-1 p-2 block w-full border text-black bg-white border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
                       </div>
 
                       <button id = "edit_popup_submit_button" type="submit" class="px-8 py-2 bg-light_mode_blue text-white rounded">Submit</button>
@@ -117,30 +117,44 @@
           {{-- JS Code --}}
           <script>
 
-            // Testing Pop-up Script
-            //   document.addEventListener('DOMContentLoaded', () => {
+            // Pop-up Script
               const openPopupBtn = document.getElementById('openPopupBtn');
+
               const closePopupBtn = document.getElementById('closePopupBtn');
+
               const popup = document.getElementById('popup');
 
-              openPopupBtn.addEventListener('click', () => {
+
+
+               function editQuote (id, quote) {
+
                   popup.classList.remove('hidden');
+
                   popup.classList.add('flex');
-              });
+
+                 // Place the quote in the input field
+                  document.getElementById('quote_edit_input').value = quote;
+
+              };
 
               closePopupBtn.addEventListener('click', () => {
+
                   popup.classList.remove('flex');
+
                   popup.classList.add('hidden');
               });
 
               // Close the popup when clicking outside of the content
               window.addEventListener('click', (event) => {
+
                   if (event.target === popup) {
+
                       popup.classList.remove('flex');
+
                       popup.classList.add('hidden');
+
                   }
               });
-              //  });
 
             </script>
 

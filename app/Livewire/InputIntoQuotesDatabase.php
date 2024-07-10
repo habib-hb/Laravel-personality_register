@@ -53,6 +53,7 @@ class InputIntoQuotesDatabase extends Component
 
     }
 
+    
 
     public function render()
     {

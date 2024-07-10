@@ -201,7 +201,7 @@
 
                         // Title Dark Mode
                         document.getElementById('popupTitle').classList.toggle('text-light_mode_blue');
-                        document.getElementById('popupTitle').classList.toggle('text-dark_mode_blue');
+                        document.getElementById('popupTitle').classList.toggle('text-white');
 
                         // quote_edit_input_label dark mode
                         document.getElementById('quote_edit_input_label').classList.toggle('text-gray-700');
@@ -210,6 +210,8 @@
                         // quote_edit_input dark mode
                         document.getElementById('quote_edit_input').classList.toggle('bg-white');
                         document.getElementById('quote_edit_input').classList.toggle('bg-input_dark_mode');
+                        document.getElementById('quote_edit_input').classList.toggle('text-white');
+                        document.getElementById('quote_edit_input').classList.toggle('text-black');
 
                         // edit_popup_submit_button dark mode
                         document.getElementById('edit_popup_submit_button').classList.toggle('bg-light_mode_blue');
