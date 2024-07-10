@@ -48,73 +48,11 @@
 
 
 
-
-        {{-- The Quote List --}}
-        <h2 id="quote_list_title" class="text-light_mode_blue text-center text-[24px] font-normal font-['Inter'] mb-[2vh]">Quote List</h2>
-
-        <div class="flex flex-col gap-4 justify-center items-center mb-4">
-
-
-
-            <div class="quote_list_element_body w-[90vw] h-[20vh] bg-zinc-100 rounded-lg relative p-5">
-
-                <div class="quote_list_element_text text-center text-black text-xl font-normal mb-5">The quote Lorem Ipsum dada dada dafdsf fdsf fsdfdsf</div>
-
-                <div class="flex justify-between">
-                    <button class="quote_list_element_edit_button w-[35vw] h-[6vh] bg-light_mode_blue rounded-lg text-white text-xl font-normal flex items-center justify-center">Edit</button>
-
-                    <button class="quote_list_element_delete_button w-[35vw] h-[6vh] bg-light_mode_red rounded-lg text-white text-xl font-normal flex items-center justify-center">Delete</button>
-
-                </div>
-
-            </div>
-
-
-
-            <div class="quote_list_element_body w-[90vw] h-[20vh] bg-zinc-100 rounded-lg relative p-5">
-
-                <div class="quote_list_element_text text-center text-black text-xl font-normal mb-5">The quote Lorem Ipsum dada dada dafdsf fdsf fsdfdsf</div>
-
-                <div class="flex justify-between">
-
-                    <button class="quote_list_element_edit_button w-[35vw] h-[6vh] bg-light_mode_blue rounded-lg text-white text-xl font-normal flex items-center justify-center">Edit</button>
-
-                    <button class="quote_list_element_delete_button w-[35vw] h-[6vh] bg-light_mode_red rounded-lg text-white text-xl font-normal flex items-center justify-center">Delete</button>
-
-                </div>
-
-            </div>
-
-
-
-            <div class="quote_list_element_body w-[90vw] h-[20vh] bg-zinc-100 rounded-lg relative p-5">
-
-                <div class="quote_list_element_text text-center text-black text-xl font-normal mb-5">The quote Lorem Ipsum dada dada dafdsf fdsf fsdfdsf</div>
-
-                <div class="flex justify-between">
-
-                    <button class="quote_list_element_edit_button w-[35vw] h-[6vh] bg-light_mode_blue rounded-lg text-white text-xl font-normal flex items-center justify-center">Edit</button>
-
-                    <button class="quote_list_element_delete_button w-[35vw] h-[6vh] bg-light_mode_red rounded-lg text-white text-xl font-normal flex items-center justify-center">Delete</button>
-
-                </div>
-
-            </div>
-
-
-
-        </div>
-
-
-
-
-
-
             </main>
 
 
 
-        @livewireScripts
+            {{-- @livewireScripts --}}
            {{-- ******************** Javascript Code ******************** --}}
 
            <script>
@@ -129,8 +67,21 @@
                     document.getElementById('session-message').style.display = 'none';
                 }, 3000);
             }
-            // The on click event
-            document.getElementById('submit_button').addEventListener('click', resetForm);
+                    // The on click event
+                    document.getElementById('submit_button').addEventListener('click', resetForm);
+
+
+
+            // Making the Delete session disappear after 5 seconds on the button click
+            function reset_delete_msg_after_timeout() {
+                    setTimeout(function() {
+                    document.getElementById('session-message').style.display = 'none';
+                    }, 5000);
+                }
+            document.querySelectorAll('.quote_list_element_delete_button').forEach(button => {
+                button.addEventListener('click', reset_delete_msg_after_timeout);
+            })
+
 
 
 
@@ -206,34 +157,65 @@
                     document.getElementById('submit_button').classList.toggle('bg-dark_mode_blue');
                     document.getElementById('submit_button').classList.toggle('bg-light_mode_blue');
 
+
+
                     // Quote List element section dark mode
-                         // Query List title
+                         // Query List title dark mode
                          document.getElementById('quote_list_title').classList.toggle('text-light_mode_blue');
                          document.getElementById('quote_list_title').classList.toggle('text-dark_mode_blue');
 
-                         // query_list_element_body
+                         // query_list_element_body dark mode
                          document.querySelectorAll('.quote_list_element_body').forEach(function(element) {
                              element.classList.toggle('bg-zinc-100');
                              element.classList.toggle('bg-input_dark_mode');
                          });
 
-                         // query_list_element_text
+                         // query_list_element_text dark mode
                          document.querySelectorAll('.quote_list_element_text').forEach(function(element) {
                              element.classList.toggle('text-white');
                              element.classList.toggle('text-black');
                          });
 
-                         // query_list_element_edit_button
+                         // query_list_element_edit_button dark mode
                          document.querySelectorAll('.quote_list_element_edit_button').forEach(function(element) {
                              element.classList.toggle('bg-dark_mode_blue');
                              element.classList.toggle('bg-light_mode_blue');
                          });
 
-                         // query_list_element_delete_button
+                         // query_list_element_delete_button dark mode
                          document.querySelectorAll('.quote_list_element_delete_button').forEach(function(element) {
                              element.classList.toggle('bg-light_mode_red');
                              element.classList.toggle('bg-dark_mode_red');
                          });
+
+
+
+                    // Edit Popup dark mode
+                        // Main box dark mode
+                        document.getElementById('popupContent').classList.toggle('bg-white');
+                        document.getElementById('popupContent').classList.toggle('bg-input_dark_mode');
+
+                        // Close Button dark mode
+                        document.getElementById('closePopupBtn').classList.toggle('text-black');
+                        document.getElementById('closePopupBtn').classList.toggle('text-white');
+
+                        // Title Dark Mode
+                        document.getElementById('popupTitle').classList.toggle('text-light_mode_blue');
+                        document.getElementById('popupTitle').classList.toggle('text-dark_mode_blue');
+
+                        // quote_edit_input_label dark mode
+                        document.getElementById('quote_edit_input_label').classList.toggle('text-gray-700');
+                        document.getElementById('quote_edit_input_label').classList.toggle('text-white');
+
+                        // quote_edit_input dark mode
+                        document.getElementById('quote_edit_input').classList.toggle('bg-white');
+                        document.getElementById('quote_edit_input').classList.toggle('bg-input_dark_mode');
+
+                        // edit_popup_submit_button dark mode
+                        document.getElementById('edit_popup_submit_button').classList.toggle('bg-light_mode_blue');
+                        document.getElementById('edit_popup_submit_button').classList.toggle('bg-dark_mode_blue');
+
+
 
 
 
@@ -242,5 +224,9 @@
 
 
     </script>
+
+
+
+        @livewireScripts
 </body>
 </html>
