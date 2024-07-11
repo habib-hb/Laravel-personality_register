@@ -42,8 +42,7 @@
 
 
 
-
-
+                {{-- The livewire component --}}
               @livewire('input-into-quotes-database')
 
 
