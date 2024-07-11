@@ -71,9 +71,10 @@
 
                     <div class="flex justify-between">
 
-                        <button class="quote_list_element_edit_button w-[35vw] h-[6vh] bg-light_mode_blue rounded-lg text-white text-xl font-normal flex items-center justify-center" onclick="editQuote({{$quote->id}} , `{{$quote->quote}}`)">Edit</button> 
+                        <button class="quote_list_element_edit_button w-[35vw] h-[6vh] bg-light_mode_blue rounded-lg text-white text-xl font-normal flex items-center justify-center" onclick="editQuote({{$quote->id}} , `{{$quote->quote}}`)">Edit</button>
 
-                        <button class="quote_list_element_delete_button w-[35vw] h-[6vh] bg-light_mode_red rounded-lg text-white text-xl font-normal flex items-center justify-center" wire:click="deleteQuote({{$quote->id}})">Delete</button>
+                        <button class="quote_list_element_delete_button w-[35vw] h-[6vh] bg-light_mode_red rounded-lg text-white text-xl font-normal flex items-center justify-center" onclick="deleteQuote({{$quote->id}})">Delete</button>
+                        {{--  wire:click="deleteQuote({{$quote->id}})" --}}
 
                     </div>
 
@@ -117,7 +118,15 @@
           {{-- JS Code --}}
           <script>
 
-            // Pop-up Script
+            // ***Delete Quote Function
+            function deleteQuote(id) {
+                console.log(Livewire.dispatchTo);
+                Livewire.dispatch('deleteQuote', {id: id});
+            }
+
+
+
+            // ***Pop-up Script
               const openPopupBtn = document.getElementById('openPopupBtn');
 
               const closePopupBtn = document.getElementById('closePopupBtn');
@@ -156,7 +165,106 @@
                   }
               });
 
+
+
+              // ***Setup dark/light mode javascript based on localStorage value
+              function themeMode(){
+              if(localStorage.getItem('theme_mode') == 'dark') {
+                      // Input labels dark mode
+                    document.getElementById('select_label').classList.toggle('text-white');
+                    document.getElementById('quote_input_label').classList.toggle('text-white');
+
+
+
+                    // Selection Fields dark mode
+                    document.getElementById('section_input').classList.toggle('bg-input_dark_mode');
+                    document.getElementById('section_input').classList.toggle('text-white');
+
+                    document.getElementById('option-1').classList.toggle('text-white');
+                    document.getElementById('option-2').classList.toggle('text-white');
+                    document.getElementById('option-3').classList.toggle('text-white');
+                    document.getElementById('option-4').classList.toggle('text-white');
+                    document.getElementById('option-5').classList.toggle('text-white');
+
+
+
+                    // Name input dark mode
+                    document.getElementById('quote_input').classList.toggle('bg-input_dark_mode');
+                    document.getElementById('quote_input').classList.toggle('text-white');
+
+
+
+                    // Submit button dark mode
+                    document.getElementById('submit_button').classList.toggle('bg-dark_mode_blue');
+                    document.getElementById('submit_button').classList.toggle('bg-light_mode_blue');
+
+
+
+                    // Quote List element section dark mode
+                         // Query List title dark mode
+                         document.getElementById('quote_list_title').classList.toggle('text-light_mode_blue');
+                         document.getElementById('quote_list_title').classList.toggle('text-dark_mode_blue');
+
+                         // query_list_element_body dark mode
+                         document.querySelectorAll('.quote_list_element_body').forEach(function(element) {
+                             element.classList.toggle('bg-zinc-100');
+                             element.classList.toggle('bg-input_dark_mode');
+                         });
+
+                         // query_list_element_text dark mode
+                         document.querySelectorAll('.quote_list_element_text').forEach(function(element) {
+                             element.classList.toggle('text-white');
+                             element.classList.toggle('text-black');
+                         });
+
+                         // query_list_element_edit_button dark mode
+                         document.querySelectorAll('.quote_list_element_edit_button').forEach(function(element) {
+                             element.classList.toggle('bg-dark_mode_blue');
+                             element.classList.toggle('bg-light_mode_blue');
+                         });
+
+                         // query_list_element_delete_button dark mode
+                         document.querySelectorAll('.quote_list_element_delete_button').forEach(function(element) {
+                             element.classList.toggle('bg-light_mode_red');
+                             element.classList.toggle('bg-dark_mode_red');
+                         });
+
+
+
+                    // Edit Popup dark mode
+                        // Main box dark mode
+                        document.getElementById('popupContent').classList.toggle('bg-white');
+                        document.getElementById('popupContent').classList.toggle('bg-input_dark_mode');
+
+                        // Close Button dark mode
+                        document.getElementById('closePopupBtn').classList.toggle('text-black');
+                        document.getElementById('closePopupBtn').classList.toggle('text-white');
+
+                        // Title Dark Mode
+                        document.getElementById('popupTitle').classList.toggle('text-light_mode_blue');
+                        document.getElementById('popupTitle').classList.toggle('text-white');
+
+                        // quote_edit_input_label dark mode
+                        document.getElementById('quote_edit_input_label').classList.toggle('text-gray-700');
+                        document.getElementById('quote_edit_input_label').classList.toggle('text-white');
+
+                        // quote_edit_input dark mode
+                        document.getElementById('quote_edit_input').classList.toggle('bg-white');
+                        document.getElementById('quote_edit_input').classList.toggle('bg-input_dark_mode');
+                        document.getElementById('quote_edit_input').classList.toggle('text-white');
+                        document.getElementById('quote_edit_input').classList.toggle('text-black');
+
+                        // edit_popup_submit_button dark mode
+                        document.getElementById('edit_popup_submit_button').classList.toggle('bg-light_mode_blue');
+                        document.getElementById('edit_popup_submit_button').classList.toggle('bg-dark_mode_blue');
+              } // If end
+
+            } // themeMode Function End
+
+            themeMode();
+
             </script>
+
 
 
 

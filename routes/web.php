@@ -137,4 +137,14 @@ Route::post('/input-quotes' , function (Request $request) {
 })->name('input-quotes-post');
 
 
+
+// Set Theme Mode
+Route::post('/set-theme-mode' , function (Request $request) {
+    // Setting Session for theme mode
+    $request->session()->put('theme_mode' , $request->theme_mode);
+
+    return response()->json(['message' => 'Theme mode set successfully!']);
+})->name('set-theme-mode');
+
+
 require __DIR__.'/auth.php';

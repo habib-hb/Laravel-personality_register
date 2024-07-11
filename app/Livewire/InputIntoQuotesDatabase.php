@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use Illuminate\Support\Facades\DB;
+use Livewire\Attributes\On;
 use Livewire\Component;
 
 class InputIntoQuotesDatabase extends Component
@@ -36,11 +37,15 @@ class InputIntoQuotesDatabase extends Component
 
         // Reset form fields
         $this->quote_input = null;
+
+         // Restating the Quote List
+         $this->database_files_personality_quote_single_type = DB::select('SELECT * FROM personality_type_based_quotes WHERE personality_type_identifier_int = ?', [intval($this->personality)]);
     }
 
 
 
     // Delete Quote from database
+    #[On('deleteQuote')]
     public function deleteQuote($id){
 
         DB::delete('DELETE FROM personality_type_based_quotes WHERE id = ?', [$id]);
@@ -53,10 +58,10 @@ class InputIntoQuotesDatabase extends Component
 
     }
 
-    
+
 
     public function render()
     {
-        return view('livewire.input-into-quotes-database' ); //, ['database_files_personality_quote_single_type' => $this->database_files_personality_quote_single_type]
+        return view('livewire.input-into-quotes-database' , ['theme_mode' => session('theme_mode')]);
     }
 }

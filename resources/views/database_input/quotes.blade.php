@@ -84,9 +84,80 @@
 
 
 
+             // ***Setup dark/light mode javascript based on localStorage value
+             if(localStorage.getItem('theme_mode') == 'dark') {
+                  // Body element dark mode
+                  document.getElementById('body_element').classList.toggle('bg-light_gray');
+                    document.getElementById('body_element').classList.toggle('bg-dark_gray');
 
-            // Dark Mode Toggler By Clicking On The Icon
+
+
+                    // Main element dark mode
+                    document.getElementById('main_element').classList.toggle('bg-light_gray');
+                    document.getElementById('main_element').classList.toggle('bg-dark_gray');
+
+
+
+                    // Dark mode logo
+                    document.getElementById('light_mode_logo').classList.toggle('hidden');
+                    document.getElementById('dark_mode_logo').classList.toggle('hidden');
+
+
+
+                    // Dark mode icon
+                    document.getElementById('light_mode_icon').classList.toggle('hidden');
+                    document.getElementById('dark_mode_icon').classList.toggle('hidden');
+
+
+
+                    // Nav element dark mode
+                    document.querySelector('nav').classList.toggle('bg-slate-50');
+                    document.querySelector('nav').classList.toggle('bg-dark_gray');
+
+
+
+                    // // Welcome text dark mode
+                    // document.getElementById('welcome_text').classList.toggle('text-white');
+
+
+
+                    // First Message dark mode
+                    document.getElementById('first_message').classList.toggle('text-dark_mode_blue');
+                    document.getElementById('first_message').classList.toggle('text-light_mode_blue');
+
+             }
+
+
+
+            // ***Dark Mode Toggler By Clicking On The Icon
             document.querySelector('#dark_mode_toggle_button').addEventListener('click', ()=>{
+
+                    // Setting the localStorage for dark mode conditonally
+                        localStorage.getItem('theme_mode') ? // If a theme mode is set
+
+                                localStorage.getItem('theme_mode') == 'dark' ?
+
+                                localStorage.setItem('theme_mode', 'light') :
+
+                                localStorage.setItem('theme_mode', 'dark') :
+
+                        localStorage.setItem('theme_mode', 'dark'); // If no theme mode is set
+
+
+
+                    // Fetch POST request
+                    fetch('{{ route('set-theme-mode') }}', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                        },
+                        body: JSON.stringify({
+                            theme_mode: localStorage.getItem('theme_mode')
+                        })
+                    })
+
+
 
                     // Body element dark mode
                     document.getElementById('body_element').classList.toggle('bg-light_gray');
