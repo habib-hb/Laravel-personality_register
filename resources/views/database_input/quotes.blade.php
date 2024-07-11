@@ -146,7 +146,7 @@
 
 
                     // Fetch POST request
-                    fetch('{{ route('set-theme-mode') }}', {
+                    fetch('{{ route('set_theme_mode') }}', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
@@ -155,7 +155,13 @@
                         body: JSON.stringify({
                             theme_mode: localStorage.getItem('theme_mode')
                         })
-                    })
+                    }).then(response => response.text())
+                    .then(data => {
+                            console.log('set_theme_mode console response: ', data);
+                        })
+                        .catch(error => {
+                            console.log('set_theme_mode console error: ', error);
+                        });
 
 
 

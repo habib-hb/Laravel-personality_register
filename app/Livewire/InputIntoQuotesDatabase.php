@@ -62,6 +62,6 @@ class InputIntoQuotesDatabase extends Component
 
     public function render()
     {
-        return view('livewire.input-into-quotes-database' , ['theme_mode' => session('theme_mode')]);
+        return view('livewire.input-into-quotes-database' , ['theme_mode' => session('theme_mode') ?? 'light']);
     }
 }

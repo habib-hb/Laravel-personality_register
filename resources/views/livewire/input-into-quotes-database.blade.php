@@ -10,14 +10,14 @@
 
                 {{-- Select Personality Type Input --}}
                 <div class="flex flex-col self-center w-full max-w-[90vw] mt-4 md:mt-2 md:max-w-[500px]">
-                    <label id="select_label" for="personality" class="text-left">Select The Personality Type:</label>
+                    <label id="select_label" for="personality" class="text-left {{$theme_mode == 'dark' ? 'text-white' : 'text-black'}}">Select The Personality Type:</label>
                 </div>
-                <select wire:model="personality" name="personality" id="section_input" class="w-[90vw] border-none rounded-md md:max-w-[500px]">
-                    <option id="option-1" value="1" class="text-black">Extroversion</option>
-                    <option id="option-2" value="2" class="text-black">Agreeableness</option>
-                    <option id="option-3" value="3" class="text-black">Openness</option>
-                    <option id="option-4" value="4" class="text-black">Conscientiousness</option>
-                    <option id="option-5" value="5" class="text-black">Neuroticism</option>
+                <select wire:model="personality" name="personality" id="section_input" class="w-[90vw] border-none rounded-md md:max-w-[500px] {{$theme_mode == 'dark' ? 'bg-input_dark_mode text-white' : ''}}">
+                    <option id="option-1" value="1" class="text-black {{$theme_mode == 'dark' ? 'text-white' : ''}}">Extroversion</option>
+                    <option id="option-2" value="2" class="text-black {{$theme_mode == 'dark' ? 'text-white' : ''}}">Agreeableness</option>
+                    <option id="option-3" value="3" class="text-black {{$theme_mode == 'dark' ? 'text-white' : ''}}">Openness</option>
+                    <option id="option-4" value="4" class="text-black {{$theme_mode == 'dark' ? 'text-white' : ''}}">Conscientiousness</option>
+                    <option id="option-5" value="5" class="text-black {{$theme_mode == 'dark' ? 'text-white' : ''}}">Neuroticism</option>
                 </select>
                 @error('personality')
                 <span class="text-red-500 text-sm">{{ $message }}</span>
@@ -25,9 +25,9 @@
 
                 {{-- Name input --}}
                 <div class="flex flex-col self-center w-full max-w-[90vw] mt-4 md:max-w-[500px]">
-                    <label id="quote_input_label" for="name" class="text-left">New Quote:</label>
+                    <label id="quote_input_label" for="name" class="text-left {{$theme_mode == 'dark' ? 'text-white' : 'text-black'}}">New Quote:</label>
                 </div>
-                <input wire:model="quote_input" type="text" id="quote_input" name="quote_input" class="w-[90vw] border-none rounded-md md:max-w-[500px]">
+                <input wire:model="quote_input" type="text" id="quote_input" name="quote_input" class="w-[90vw] border-none rounded-md md:max-w-[500px] {{$theme_mode == 'dark' ? 'bg-input_dark_mode text-white' : ''}}">
                 @error('quote_input')
                 <span class="text-red-500 text-sm">{{ $message }}</span>
                 @enderror
@@ -35,7 +35,7 @@
 
 
                 {{-- Submit button --}}
-                <input type="submit" id="submit_button" value="Add Quote" class="mt-[4vh] mb-[4vh] h-12 w-[90%] rounded-md bg-light_mode_blue text-white hover:opacity-90 text-xl md:max-w-[350px] md:mb-[12vh]">
+                <input type="submit" id="submit_button" value="Add Quote" class="mt-[4vh] mb-[4vh] h-12 w-[90%] rounded-md {{$theme_mode == 'dark' ? 'bg-dark_mode_blue' : 'bg-light_mode_blue'}} text-white hover:opacity-90 text-xl md:max-w-[350px] md:mb-[12vh]">
 
                 @if ($errors->any())
                 <div class="text-red-500 text-sm">
@@ -47,7 +47,7 @@
 
 
             {{-- Session Message --}}
-            <h2 id="session-message" class="text-light_mode_blue text-center text-[16px] font-normal font-['Inter'] mt-[4vh]">
+            <h2 id="session-message" class="{{$theme_mode == 'dark' ? 'text-dark_mode_blue' : 'text-light_mode_blue' }} text-center text-[16px] font-normal font-['Inter'] mt-[4vh]">
 
                 @if (session()->has('message'))
                     {{ session('message') }}
@@ -58,22 +58,22 @@
 
 
         {{-- The Quote List --}}
-        <h2 id="quote_list_title" class="text-light_mode_blue text-center text-[24px] font-normal font-['Inter'] mb-[2vh]">Quote List</h2>
+        <h2 id="quote_list_title" class="{{$theme_mode == 'dark' ? 'text-dark_mode_blue' : 'text-light_mode_blue' }} text-center text-[24px] font-normal font-['Inter'] mb-[2vh]">Quote List</h2>
 
         <div class="flex flex-col gap-4 justify-center items-center mb-4">
 
             {{-- For each quote, new component --}}
             @foreach ($database_files_personality_quote_single_type as $quote)
 
-                <div wire:key="{{$loop->index}}" class="quote_list_element_body w-[90vw] bg-zinc-100 rounded-lg relative p-5">
+                <div wire:key="{{$loop->index}}" class="quote_list_element_body w-[90vw] {{$theme_mode == 'dark' ? 'bg-input_dark_mode' : 'bg-zinc-100'}} rounded-lg relative p-5">
 
-                    <div class="quote_list_element_text text-center text-black text-xl font-normal mb-5">{{$quote->quote}}</div>
+                    <div class="quote_list_element_text text-center {{$theme_mode == 'dark' ? 'text-white' : 'text-black'}} text-xl font-normal mb-5">{{$quote->quote}}</div>
 
                     <div class="flex justify-between">
 
-                        <button class="quote_list_element_edit_button w-[35vw] h-[6vh] bg-light_mode_blue rounded-lg text-white text-xl font-normal flex items-center justify-center" onclick="editQuote({{$quote->id}} , `{{$quote->quote}}`)">Edit</button>
+                        <button class="quote_list_element_edit_button w-[35vw] h-[6vh] {{$theme_mode == 'dark' ? 'bg-dark_mode_blue' : 'bg-light_mode_blue'}} rounded-lg text-white text-xl font-normal flex items-center justify-center" onclick="editQuote({{$quote->id}} , `{{$quote->quote}}`)">Edit</button>
 
-                        <button class="quote_list_element_delete_button w-[35vw] h-[6vh] bg-light_mode_red rounded-lg text-white text-xl font-normal flex items-center justify-center" onclick="deleteQuote({{$quote->id}})">Delete</button>
+                        <button class="quote_list_element_delete_button w-[35vw] h-[6vh] {{$theme_mode == 'dark' ? 'bg-dark_mode_red' : 'bg-light_mode_red'}} rounded-lg text-white text-xl font-normal flex items-center justify-center" onclick="deleteQuote({{$quote->id}})">Delete</button>
                         {{--  wire:click="deleteQuote({{$quote->id}})" --}}
 
                     </div>
@@ -92,20 +92,20 @@
 
           <div id="popup" class="fixed inset-0 items-center justify-center bg-black bg-opacity-80 hidden z-50">
 
-              <div id="popupContent" class="bg-white p-6 rounded-md w-11/12 max-w-lg relative">
+              <div id="popupContent" class="{{$theme_mode == 'dark' ? 'bg-input_dark_mode' : 'bg-white'}} p-6 rounded-md w-11/12 max-w-lg relative">
 
-                  <span id="closePopupBtn" class="absolute text-black top-4 right-4 text-2xl cursor-pointer">&times;</span>
+                  <span id="closePopupBtn" class="absolute {{$theme_mode == 'dark' ? 'text-white' : 'text-black'}} top-4 right-4 text-2xl cursor-pointer">&times;</span>
 
-                  <h2 id="popupTitle" class="text-2xl text-light_mode_blue text-center mb-4">Edit Box</h2>
+                  <h2 id="popupTitle" class="text-2xl {{$theme_mode == 'dark' ? 'text-white' : 'text-light_mode_blue'}} text-center mb-4">Edit Box</h2>
 
                   <form id="editForm" class="space-y-4 flex flex-col w-full items-center justify-center">
 
                       <div class="w-full">
-                          <label for="quote_edit_input" id="quote_edit_input_label" class="block text-sm font-medium text-gray-700">Quote:</label>
-                          <input type="text" id="quote_edit_input" name="quote_edit_input" required class="mt-1 p-2 block w-full border text-black bg-white border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+                          <label for="quote_edit_input" id="quote_edit_input_label" class="block text-sm font-medium {{$theme_mode == 'dark' ? 'text-white' : 'text-gray-700'}}">Quote:</label>
+                          <input type="text" id="quote_edit_input" name="quote_edit_input" required class="mt-1 p-2 block w-full border bg-white {{$theme_mode == 'dark' ? 'bg-input_dark_mode text-white' : 'bg-white text-black'}} border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
                       </div>
 
-                      <button id = "edit_popup_submit_button" type="submit" class="px-8 py-2 bg-light_mode_blue text-white rounded">Submit</button>
+                      <button id = "edit_popup_submit_button" type="submit" class="px-8 py-2  {{ $theme_mode == 'dark' ? 'bg-dark_mode_blue' : 'bg-light_mode_blue'}} text-white rounded">Submit</button>
 
                   </form>
 
@@ -261,10 +261,9 @@
 
             } // themeMode Function End
 
-            themeMode();
+            // themeMode();
 
             </script>
-
 
 
 

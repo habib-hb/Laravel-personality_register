@@ -92,7 +92,7 @@ Route::post('/email/verification-notification', function (Request $request) {
 
 
 // Sending Mail stuffs
-Route::get('send-mail', function () {
+Route::get('send_mail', function () {
     $details = [
         'title' => 'Success',
         'content' => 'This is an email testing using Laravel-Brevo',
@@ -114,37 +114,37 @@ Route::get('send-mail', function () {
 
 
 // Input into quotes database - route setup
-Route::get('/input-quotes' , function () {
+Route::get('/input_quotes' , function () {
 
     return view('database_input.quotes');
 
-})->name('input-quotes');
+})->name('input_quotes');
 
-Route::post('/input-quotes' , function (Request $request) {
+// Route::post('/input-quotes' , function (Request $request) {
 
-    // Validation
-    $request->validate([
-        'personality' => 'required',
-        'quote_input' => 'required',
-    ]);
+//     // Validation
+//     $request->validate([
+//         'personality' => 'required',
+//         'quote_input' => 'required',
+//     ]);
 
-    // Inserting Into quotes database
-    DB::insert('INSERT INTO personality_type_based_quotes (personality_type_identifier_int , quote) VALUES (?, ?)' , [intval($request->personality) , $request->quote_input]);
+//     // Inserting Into quotes database
+//     DB::insert('INSERT INTO personality_type_based_quotes (personality_type_identifier_int , quote) VALUES (?, ?)' , [intval($request->personality) , $request->quote_input]);
 
 
 
-    return redirect('/input-quotes')->with('success' , 'Quote Added Successfully');
-})->name('input-quotes-post');
+//     return redirect('/input-quotes')->with('success' , 'Quote Added Successfully');
+// })->name('input-quotes-post');
 
 
 
 // Set Theme Mode
-Route::post('/set-theme-mode' , function (Request $request) {
+Route::post('/set_theme_mode' , function (Request $request) {
     // Setting Session for theme mode
     $request->session()->put('theme_mode' , $request->theme_mode);
 
     return response()->json(['message' => 'Theme mode set successfully!']);
-})->name('set-theme-mode');
+})->name('set_theme_mode');
 
 
 require __DIR__.'/auth.php';
