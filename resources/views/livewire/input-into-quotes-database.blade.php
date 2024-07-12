@@ -71,9 +71,9 @@
 
                     <div class="flex justify-between">
 
-                        <button class="quote_list_element_edit_button w-[35vw] h-[6vh] {{$theme_mode == 'dark' ? 'bg-dark_mode_blue' : 'bg-light_mode_blue'}} rounded-lg text-white text-xl font-normal flex items-center justify-center" onclick="editQuote({{$quote->id}} , `{{$quote->quote}}`)">Edit</button>
+                        <button class="quote_list_element_edit_button w-[35vw] h-[6vh] {{$theme_mode == 'dark' ? 'bg-dark_mode_blue' : 'bg-light_mode_blue'}} rounded-lg text-white text-xl font-normal flex items-center justify-center" onclick="edit_quote({{$quote->id}} , `{{$quote->quote}}`)">Edit</button>
 
-                        <button class="quote_list_element_delete_button w-[35vw] h-[6vh] {{$theme_mode == 'dark' ? 'bg-dark_mode_red' : 'bg-light_mode_red'}} rounded-lg text-white text-xl font-normal flex items-center justify-center" onclick="deleteQuote({{$quote->id}})">Delete</button>
+                        <button class="quote_list_element_delete_button w-[35vw] h-[6vh] {{$theme_mode == 'dark' ? 'bg-dark_mode_red' : 'bg-light_mode_red'}} rounded-lg text-white text-xl font-normal flex items-center justify-center" onclick="delete_quote({{$quote->id}} , `{{$quote->quote}}`)">Delete</button>
                         {{--  wire:click="deleteQuote({{$quote->id}})" --}}
 
                     </div>
@@ -87,22 +87,25 @@
 
 
 
-          {{-- Pop-Up HTML --}}
-          <button id="openPopupBtn" class="px-4 py-2 bg-blue-500 text-white rounded">Open Edit Form</button>
+          {{-- Pop-Up Edit Form HTML --}}
+          <div id="popup_edit_body" class="fixed inset-0 items-center justify-center bg-black bg-opacity-80 hidden z-50">
 
-          <div id="popup" class="fixed inset-0 items-center justify-center bg-black bg-opacity-80 hidden z-50">
+              <div id="popup_edit_content" class="{{$theme_mode == 'dark' ? 'bg-input_dark_mode' : 'bg-white'}} p-6 rounded-md w-11/12 max-w-lg relative">
 
-              <div id="popupContent" class="{{$theme_mode == 'dark' ? 'bg-input_dark_mode' : 'bg-white'}} p-6 rounded-md w-11/12 max-w-lg relative">
+                  <span id="close_popup_edit_btn" class="absolute {{$theme_mode == 'dark' ? 'text-white' : 'text-black'}} top-4 right-4 text-4xl cursor-pointer hover:scale-125">&times;</span>
 
-                  <span id="closePopupBtn" class="absolute {{$theme_mode == 'dark' ? 'text-white' : 'text-black'}} top-4 right-4 text-2xl cursor-pointer">&times;</span>
+                  <h2 id="popup_edit_title" class="text-2xl {{$theme_mode == 'dark' ? 'text-white' : 'text-light_mode_blue'}} text-center mb-4">Edit Box</h2>
 
-                  <h2 id="popupTitle" class="text-2xl {{$theme_mode == 'dark' ? 'text-white' : 'text-light_mode_blue'}} text-center mb-4">Edit Box</h2>
-
-                  <form id="editForm" class="space-y-4 flex flex-col w-full items-center justify-center">
+                  <form id="edit_quote_form" class="space-y-4 flex flex-col w-full items-center justify-center">
 
                       <div class="w-full">
+                          {{-- A hidden Input field --}}
+                          <input type="hidden" id="quote_edit_id" name="quote_edit_id" value="">
+
                           <label for="quote_edit_input" id="quote_edit_input_label" class="block text-sm font-medium {{$theme_mode == 'dark' ? 'text-white' : 'text-gray-700'}}">Quote:</label>
-                          <input type="text" id="quote_edit_input" name="quote_edit_input" required class="mt-1 p-2 block w-full border bg-white {{$theme_mode == 'dark' ? 'bg-input_dark_mode text-white' : 'bg-white text-black'}} border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+
+                          <input type="text" id="quote_edit_input" name="quote_edit_input" required class="mt-1 p-2 block w-full border  {{$theme_mode == 'dark' ? 'bg-input_dark_mode text-white' : 'bg-white text-black'}} border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+
                       </div>
 
                       <button id = "edit_popup_submit_button" type="submit" class="px-8 py-2  {{ $theme_mode == 'dark' ? 'bg-dark_mode_blue' : 'bg-light_mode_blue'}} text-white rounded">Submit</button>
@@ -112,153 +115,247 @@
               </div>
 
           </div>
+            {{-- End Pop-Up Edit Form HTML --}}
+
+
+
+        {{-- Pop-Up Delete Form HTML --}}
+        <div id="popup_delete_body" class="fixed inset-0 items-center justify-center bg-black bg-opacity-80 hidden z-50">
+
+            <div id="popup_delete_content" class="{{$theme_mode == 'dark' ? 'bg-input_dark_mode' : 'bg-white'}} p-6 rounded-md w-11/12 max-w-lg relative">
+
+                <span id="close_popup_delete_btn" class="absolute {{$theme_mode == 'dark' ? 'text-white' : 'text-black'}} top-4 right-4 text-4xl cursor-pointer hover:scale-125">&times;</span>
+
+                <h2 id="popup_delete_title" class="text-lg {{$theme_mode == 'dark' ? 'text-white' : 'text-light_mode_blue'}} text-center mb-4">Are you sure?</h2>
+
+                <form id="delete_quote_form" class="space-y-4 flex flex-col w-full items-center justify-center">
+
+                    <div class="w-full">
+
+                        {{-- A hidden Input field --}}
+                        <input type="hidden" id="quote_delete_id" name="quote_delete_id" value="">
+
+                        <p id="deletable_quote" class="mt-1 p-2 block w-full border  {{$theme_mode == 'dark' ? 'bg-input_dark_mode text-white' : 'bg-white text-black'}} border-gray-300 rounded-md shadow-sm"></p>
+
+                    </div>
+
+                    <button id = "delete_popup_submit_button" type="submit" class="px-8 py-2  {{ $theme_mode == 'dark' ? 'bg-dark_mode_red' : 'bg-light_mode_red'}} text-white rounded">Delete</button>
+
+                </form>
+
+            </div>
+
+        </div>
+          {{-- End Pop-Up Delete Form HTML --}}
 
 
 
           {{-- JS Code --}}
           <script>
-            // ***Delete Quote Function
-            function deleteQuote(id) {
-                console.log(Livewire.dispatchTo);
-                Livewire.dispatch('deleteQuote', {id: id});
-            }
+            // ***Delete Quote Form Pop-up Script
+                    // function deleteQuote(id) {
+                    //     console.log(Livewire.dispatchTo);
+                    //     Livewire.dispatch('delete_quote', {id: id});
+                    // }
+                        const close_popup_delete_btn = document.getElementById('close_popup_delete_btn');
+
+                        const popup_delete_body = document.getElementById('popup_delete_body');
+
+                        const delete_popup_form_submit = document.getElementById('delete_quote_form');
+
+
+                        // Opening the delete popup with relevant values
+                        function delete_quote (id, quote) {
+                            popup_delete_body.classList.remove('hidden');
+                            popup_delete_body.classList.add('flex');
+                            document.getElementById('deletable_quote').innerHTML = quote;
+                            document.getElementById('quote_delete_id').value = id;
+                        };
+
+                        // Submitting the delete form data to the livewire method
+                        delete_popup_form_submit.addEventListener('submit', (e) => {
+                            e.preventDefault();
+                            Livewire.dispatch('delete_quote', {
+                                id: document.getElementById('quote_delete_id').value
+                            });
+                            popup_delete_body.classList.remove('flex');
+                            popup_delete_body.classList.add('hidden');
+                        });
+
+                        // Closing the delete popup
+                        close_popup_delete_btn.addEventListener('click', () => {
+                            popup_delete_body.classList.remove('flex');
+                            popup_delete_body.classList.add('hidden');
+                        });
+
+                        // Close the popup_delete_body when clicking outside of the content
+                        window.addEventListener('click', function(event) {
+                            if (event.target == popup_delete_body) {
+                                popup_delete_body.classList.remove('flex');
+                                popup_delete_body.classList.add('hidden');
+                            }
+                        });
 
 
 
-            // ***Pop-up Script
-              const openPopupBtn = document.getElementById('openPopupBtn');
-
-              const closePopupBtn = document.getElementById('closePopupBtn');
-
-              const popup = document.getElementById('popup');
 
 
+            // *** Edit Quote Form Pop-up Script
+            //   const open_popup_btn = document.getElementById('open_popup_btn');
 
-               function editQuote (id, quote) {
+                        const close_popup_edit_btn = document.getElementById('close_popup_edit_btn');
 
-                  popup.classList.remove('hidden');
+                        const popup_edit_body = document.getElementById('popup_edit_body');
 
-                  popup.classList.add('flex');
+                        const edit_popup_form_submit = document.getElementById('edit_quote_form');
 
-                 // Place the quote in the input field
-                  document.getElementById('quote_edit_input').value = quote;
 
-              };
 
-              closePopupBtn.addEventListener('click', () => {
+                        // Opening the edit popup with relevant values
+                        function edit_quote (id, quote) {
 
-                  popup.classList.remove('flex');
+                            popup_edit_body.classList.remove('hidden');
 
-                  popup.classList.add('hidden');
-              });
+                            popup_edit_body.classList.add('flex');
 
-              // Close the popup when clicking outside of the content
-              window.addEventListener('click', (event) => {
+                            // Place the edit quote in the input field
+                            document.getElementById('quote_edit_input').value = quote;
 
-                  if (event.target === popup) {
+                            // Place the id in the edit input field
+                            document.getElementById('quote_edit_id').value = id;
 
-                      popup.classList.remove('flex');
+                        };
 
-                      popup.classList.add('hidden');
+                        // Submitting the edit form data to the livewire method
+                        edit_popup_form_submit.addEventListener('submit', (e) => {
 
-                  }
-              });
+                                    e.preventDefault();
+
+                                    Livewire.dispatch('edit_quote_submit', {
+                                        id: document.getElementById('quote_edit_id').value,
+                                        quote: document.getElementById('quote_edit_input').value
+                                    });
+
+                                    popup_edit_body.classList.remove('flex');
+
+                                    popup_edit_body.classList.add('hidden');
+
+                        });
+
+                        close_popup_edit_btn.addEventListener('click', () => {
+
+                            popup_edit_body.classList.remove('flex');
+
+                            popup_edit_body.classList.add('hidden');
+                        });
+
+                        // Close the popup_edit_body when clicking outside of the content
+                        window.addEventListener('click', (event) => {
+
+                            if (event.target === popup_edit_body) {
+
+                                popup_edit_body.classList.remove('flex');
+
+                                popup_edit_body.classList.add('hidden');
+
+                            }
+                        });
 
 
 
               // ***Setup dark/light mode javascript based on localStorage value
-              function themeMode(){
-              if(localStorage.getItem('theme_mode') == 'dark') {
-                      // Input labels dark mode
-                    document.getElementById('select_label').classList.toggle('text-white');
-                    document.getElementById('quote_input_label').classList.toggle('text-white');
+            //   function themeMode(){
+            //   if(localStorage.getItem('theme_mode') == 'dark') {
+            //           // Input labels dark mode
+            //         document.getElementById('select_label').classList.toggle('text-white');
+            //         document.getElementById('quote_input_label').classList.toggle('text-white');
 
 
 
-                    // Selection Fields dark mode
-                    document.getElementById('section_input').classList.toggle('bg-input_dark_mode');
-                    document.getElementById('section_input').classList.toggle('text-white');
+            //         // Selection Fields dark mode
+            //         document.getElementById('section_input').classList.toggle('bg-input_dark_mode');
+            //         document.getElementById('section_input').classList.toggle('text-white');
 
-                    document.getElementById('option-1').classList.toggle('text-white');
-                    document.getElementById('option-2').classList.toggle('text-white');
-                    document.getElementById('option-3').classList.toggle('text-white');
-                    document.getElementById('option-4').classList.toggle('text-white');
-                    document.getElementById('option-5').classList.toggle('text-white');
-
-
-
-                    // Name input dark mode
-                    document.getElementById('quote_input').classList.toggle('bg-input_dark_mode');
-                    document.getElementById('quote_input').classList.toggle('text-white');
+            //         document.getElementById('option-1').classList.toggle('text-white');
+            //         document.getElementById('option-2').classList.toggle('text-white');
+            //         document.getElementById('option-3').classList.toggle('text-white');
+            //         document.getElementById('option-4').classList.toggle('text-white');
+            //         document.getElementById('option-5').classList.toggle('text-white');
 
 
 
-                    // Submit button dark mode
-                    document.getElementById('submit_button').classList.toggle('bg-dark_mode_blue');
-                    document.getElementById('submit_button').classList.toggle('bg-light_mode_blue');
+            //         // Name input dark mode
+            //         document.getElementById('quote_input').classList.toggle('bg-input_dark_mode');
+            //         document.getElementById('quote_input').classList.toggle('text-white');
+
+
+
+            //         // Submit button dark mode
+            //         document.getElementById('submit_button').classList.toggle('bg-dark_mode_blue');
+            //         document.getElementById('submit_button').classList.toggle('bg-light_mode_blue');
 
 
 
                     // Quote List element section dark mode
                          // Query List title dark mode
-                         document.getElementById('quote_list_title').classList.toggle('text-light_mode_blue');
-                         document.getElementById('quote_list_title').classList.toggle('text-dark_mode_blue');
+                        //  document.getElementById('quote_list_title').classList.toggle('text-light_mode_blue');
+                        //  document.getElementById('quote_list_title').classList.toggle('text-dark_mode_blue');
 
-                         // query_list_element_body dark mode
-                         document.querySelectorAll('.quote_list_element_body').forEach(function(element) {
-                             element.classList.toggle('bg-zinc-100');
-                             element.classList.toggle('bg-input_dark_mode');
-                         });
+                        //  // query_list_element_body dark mode
+                        //  document.querySelectorAll('.quote_list_element_body').forEach(function(element) {
+                        //      element.classList.toggle('bg-zinc-100');
+                        //      element.classList.toggle('bg-input_dark_mode');
+                        //  });
 
-                         // query_list_element_text dark mode
-                         document.querySelectorAll('.quote_list_element_text').forEach(function(element) {
-                             element.classList.toggle('text-white');
-                             element.classList.toggle('text-black');
-                         });
+                        //  // query_list_element_text dark mode
+                        //  document.querySelectorAll('.quote_list_element_text').forEach(function(element) {
+                        //      element.classList.toggle('text-white');
+                        //      element.classList.toggle('text-black');
+                        //  });
 
-                         // query_list_element_edit_button dark mode
-                         document.querySelectorAll('.quote_list_element_edit_button').forEach(function(element) {
-                             element.classList.toggle('bg-dark_mode_blue');
-                             element.classList.toggle('bg-light_mode_blue');
-                         });
+                        //  // query_list_element_edit_button dark mode
+                        //  document.querySelectorAll('.quote_list_element_edit_button').forEach(function(element) {
+                        //      element.classList.toggle('bg-dark_mode_blue');
+                        //      element.classList.toggle('bg-light_mode_blue');
+                        //  });
 
-                         // query_list_element_delete_button dark mode
-                         document.querySelectorAll('.quote_list_element_delete_button').forEach(function(element) {
-                             element.classList.toggle('bg-light_mode_red');
-                             element.classList.toggle('bg-dark_mode_red');
-                         });
+                        //  // query_list_element_delete_button dark mode
+                        //  document.querySelectorAll('.quote_list_element_delete_button').forEach(function(element) {
+                        //      element.classList.toggle('bg-light_mode_red');
+                        //      element.classList.toggle('bg-dark_mode_red');
+                        //  });
 
 
 
                     // Edit Popup dark mode
-                        // Main box dark mode
-                        document.getElementById('popupContent').classList.toggle('bg-white');
-                        document.getElementById('popupContent').classList.toggle('bg-input_dark_mode');
+                         // Main box dark/light mode
+                        // document.getElementById('popup_content').classList.toggle('bg-white');
+                        // document.getElementById('popup_content').classList.toggle('bg-input_dark_mode');
 
-                        // Close Button dark mode
-                        document.getElementById('closePopupBtn').classList.toggle('text-black');
-                        document.getElementById('closePopupBtn').classList.toggle('text-white');
+                        // // Close Button dark/light mode
+                        // document.getElementById('close_popup_btn').classList.toggle('text-black');
+                        // document.getElementById('close_popup_btn').classList.toggle('text-white');
 
-                        // Title Dark Mode
-                        document.getElementById('popupTitle').classList.toggle('text-light_mode_blue');
-                        document.getElementById('popupTitle').classList.toggle('text-white');
+                        // // Title Dark/Light Mode
+                        // document.getElementById('popup_title').classList.toggle('text-light_mode_blue');
+                        // document.getElementById('popup_title').classList.toggle('text-white');
 
-                        // quote_edit_input_label dark mode
-                        document.getElementById('quote_edit_input_label').classList.toggle('text-gray-700');
-                        document.getElementById('quote_edit_input_label').classList.toggle('text-white');
+                        // // quote_edit_input_label dark/light mode
+                        // document.getElementById('quote_edit_input_label').classList.toggle('text-gray-700');
+                        // document.getElementById('quote_edit_input_label').classList.toggle('text-white');
 
-                        // quote_edit_input dark mode
-                        document.getElementById('quote_edit_input').classList.toggle('bg-white');
-                        document.getElementById('quote_edit_input').classList.toggle('bg-input_dark_mode');
-                        document.getElementById('quote_edit_input').classList.toggle('text-white');
-                        document.getElementById('quote_edit_input').classList.toggle('text-black');
+                        // // quote_edit_input dark/light mode
+                        // document.getElementById('quote_edit_input').classList.toggle('bg-white');
+                        // document.getElementById('quote_edit_input').classList.toggle('bg-input_dark_mode');
+                        // document.getElementById('quote_edit_input').classList.toggle('text-white');
+                        // document.getElementById('quote_edit_input').classList.toggle('text-black');
 
-                        // edit_popup_submit_button dark mode
-                        document.getElementById('edit_popup_submit_button').classList.toggle('bg-light_mode_blue');
-                        document.getElementById('edit_popup_submit_button').classList.toggle('bg-dark_mode_blue');
-              } // If end
+                        // // edit_popup_submit_button dark/light mode
+                        // document.getElementById('edit_popup_submit_button').classList.toggle('bg-light_mode_blue');
+                        // document.getElementById('edit_popup_submit_button').classList.toggle('bg-dark_mode_blue');
+              //} // If end
 
-            } // themeMode Function End
+            //} // themeMode Function End
 
             // themeMode();
 

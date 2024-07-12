@@ -14,11 +14,20 @@ class InputIntoQuotesDatabase extends Component
 
     public $database_files_personality_quote_single_type = [];
 
+
     // Extracting Data from extroversion database table
     public function mount()
     {
-        $this->database_files_personality_quote_single_type = DB::select('SELECT * FROM personality_type_based_quotes WHERE personality_type_identifier_int = ?', [intval($this->personality)]); // default is "1"
+        $this->database_files_personality_quote_single_type = DB::select('SELECT * FROM personality_type_based_quotes WHERE personality_type_identifier_int = ? ORDER BY id DESC', [intval($this->personality)]); // default is "1"
     }
+
+
+    #[On('restart')]
+    public function restart(){
+
+        // It's just for rerendering this component's purpose
+
+     }
 
 
 
@@ -39,14 +48,14 @@ class InputIntoQuotesDatabase extends Component
         $this->quote_input = null;
 
          // Restating the Quote List
-         $this->database_files_personality_quote_single_type = DB::select('SELECT * FROM personality_type_based_quotes WHERE personality_type_identifier_int = ?', [intval($this->personality)]);
+         $this->database_files_personality_quote_single_type = DB::select('SELECT * FROM personality_type_based_quotes WHERE personality_type_identifier_int = ? ORDER BY id DESC', [intval($this->personality)]);
     }
 
 
 
     // Delete Quote from database
-    #[On('deleteQuote')]
-    public function deleteQuote($id){
+    #[On('delete_quote')]
+    public function delete_quote($id){
 
         DB::delete('DELETE FROM personality_type_based_quotes WHERE id = ?', [$id]);
 
@@ -54,10 +63,31 @@ class InputIntoQuotesDatabase extends Component
         session()->flash('message', 'Quote deleted successfully.');
 
         // Restating the Quote List
-        $this->database_files_personality_quote_single_type = DB::select('SELECT * FROM personality_type_based_quotes WHERE personality_type_identifier_int = ?', [intval($this->personality)]);
+        $this->database_files_personality_quote_single_type = DB::select('SELECT * FROM personality_type_based_quotes WHERE personality_type_identifier_int = ? ORDER BY id DESC', [intval($this->personality)]);
 
     }
 
+
+
+    // Edit Quote
+    #[On('edit_quote_submit')]
+    public function edit_quote_submit($id , $quote){
+
+        try{
+
+            DB::update('UPDATE personality_type_based_quotes SET quote = ? WHERE id = ?', [$quote , $id]);
+
+            // Sending a flash message
+            session()->flash('message', 'Quote updated successfully. id = ' . $id . ' quote = ' . $quote);
+
+            // Restating the Quote List
+            $this->database_files_personality_quote_single_type = DB::select('SELECT * FROM personality_type_based_quotes WHERE personality_type_identifier_int = ? ORDER BY id DESC', [intval($this->personality)]);
+
+        } catch (\Exception $e) {
+            // Handle any errors that may occur
+            session()->flash('error', 'An error occurred while updating the quote.');
+        }
+    }
 
 
     public function render()
