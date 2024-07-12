@@ -117,7 +117,6 @@
 
           {{-- JS Code --}}
           <script>
-
             // ***Delete Quote Function
             function deleteQuote(id) {
                 console.log(Livewire.dispatchTo);

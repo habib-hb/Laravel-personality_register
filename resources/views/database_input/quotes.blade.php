@@ -84,7 +84,12 @@
 
 
              // ***Setup dark/light mode javascript based on localStorage value
-             if(localStorage.getItem('theme_mode') == 'dark') {
+                    // Testing
+                    var theme_mode_from_laravel = @json($theme_mode);
+
+                    console.log("Coming From Controller Laravel : " , theme_mode_from_laravel);
+
+             if(theme_mode_from_laravel == 'dark') {
                   // Body element dark mode
                   document.getElementById('body_element').classList.toggle('bg-light_gray');
                     document.getElementById('body_element').classList.toggle('bg-dark_gray');
@@ -131,17 +136,12 @@
             // ***Dark Mode Toggler By Clicking On The Icon
             document.querySelector('#dark_mode_toggle_button').addEventListener('click', ()=>{
 
-                    // Setting the localStorage for dark mode conditonally
-                        localStorage.getItem('theme_mode') ? // If a theme mode is set
+                            // Tooggle conditional logic
+                            theme_mode_from_laravel == 'dark' ?
 
-                                localStorage.getItem('theme_mode') == 'dark' ?
+                            theme_mode_from_laravel = 'light' :
 
-                                localStorage.setItem('theme_mode', 'light') :
-
-                                localStorage.setItem('theme_mode', 'dark') :
-
-                        localStorage.setItem('theme_mode', 'dark'); // If no theme mode is set
-
+                            theme_mode_from_laravel = 'dark'
 
 
                     // Fetch POST request
@@ -152,7 +152,7 @@
                             'X-CSRF-TOKEN': '{{ csrf_token() }}'
                         },
                         body: JSON.stringify({
-                            theme_mode: localStorage.getItem('theme_mode')
+                            theme_mode: theme_mode_from_laravel
                         })
                     }).then(response => response.text())
                     .then(data => {

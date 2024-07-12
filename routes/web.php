@@ -116,25 +116,9 @@ Route::get('send_mail', function () {
 // Input into quotes database - route setup
 Route::get('/input_quotes' , function () {
 
-    return view('database_input.quotes');
+    return view('database_input.quotes' , ['theme_mode' => session('theme_mode') ?? 'light']);
 
 })->name('input_quotes');
-
-// Route::post('/input-quotes' , function (Request $request) {
-
-//     // Validation
-//     $request->validate([
-//         'personality' => 'required',
-//         'quote_input' => 'required',
-//     ]);
-
-//     // Inserting Into quotes database
-//     DB::insert('INSERT INTO personality_type_based_quotes (personality_type_identifier_int , quote) VALUES (?, ?)' , [intval($request->personality) , $request->quote_input]);
-
-
-
-//     return redirect('/input-quotes')->with('success' , 'Quote Added Successfully');
-// })->name('input-quotes-post');
 
 
 
