@@ -12,7 +12,7 @@
                 <div class="flex flex-col self-center w-full max-w-[90vw] mt-4 md:mt-2 md:max-w-[500px]">
                     <label id="select_label" for="personality" class="text-left {{$theme_mode == 'dark' ? 'text-white' : 'text-black'}}">Select The Personality Type:</label>
                 </div>
-                <select wire:model="personality" name="personality" id="section_input" class="w-[90vw] border-none rounded-md md:max-w-[500px] {{$theme_mode == 'dark' ? 'bg-input_dark_mode text-white' : ''}}">
+                <select wire:model="personality" onchange="select_personality_change(this)" name="personality" id="section_input" class="w-[90vw] border-none rounded-md md:max-w-[500px] {{$theme_mode == 'dark' ? 'bg-input_dark_mode text-white' : ''}}">
                     <option id="option-1" value="1" class="text-black {{$theme_mode == 'dark' ? 'text-white' : ''}}">Extroversion</option>
                     <option id="option-2" value="2" class="text-black {{$theme_mode == 'dark' ? 'text-white' : ''}}">Agreeableness</option>
                     <option id="option-3" value="3" class="text-black {{$theme_mode == 'dark' ? 'text-white' : ''}}">Openness</option>
@@ -35,7 +35,7 @@
 
 
                 {{-- Submit button --}}
-                <input type="submit" id="submit_button" value="Add Quote" class="mt-[4vh] mb-[4vh] h-12 w-[90%] rounded-md {{$theme_mode == 'dark' ? 'bg-dark_mode_blue' : 'bg-light_mode_blue'}} text-white hover:opacity-90 text-xl md:max-w-[350px] md:mb-[12vh]">
+                <input type="submit" id="submit_button" value="Add Quote" class="mt-[4vh] mb-[2vh] h-12 w-[90%] rounded-md {{$theme_mode == 'dark' ? 'bg-dark_mode_blue' : 'bg-light_mode_blue'}} text-white hover:opacity-90 text-xl md:max-w-[350px] md:mb-[12vh]">
 
                 @if ($errors->any())
                 <div class="text-red-500 text-sm">
@@ -47,7 +47,7 @@
 
 
             {{-- Session Message --}}
-            <h2 id="session-message" class="{{$theme_mode == 'dark' ? 'text-dark_mode_blue' : 'text-light_mode_blue' }} text-center text-[16px] font-normal font-['Inter'] mt-[4vh]">
+            <h2 id="session-message" class="{{$theme_mode == 'dark' ? 'text-dark_mode_blue' : 'text-light_mode_blue' }} text-center text-[16px] font-normal font-['Inter'] mt-[2vh]">
 
                 @if (session()->has('message'))
                     {{ session('message') }}
@@ -65,7 +65,7 @@
             {{-- For each quote, new component --}}
             @foreach ($database_files_personality_quote_single_type as $quote)
 
-                <div wire:key="{{$loop->index}}" class="quote_list_element_body w-[90vw] {{$theme_mode == 'dark' ? 'bg-input_dark_mode' : 'bg-zinc-100'}} rounded-lg relative p-5">
+                <div wire:key="{{$loop->index}}" class="quote_list_element_body w-[90vw] {{$theme_mode == 'dark' ? 'bg-input_dark_mode' : 'bg-zinc-100'}} rounded-lg relative p-5 shadow-xl">
 
                     <div class="quote_list_element_text text-center {{$theme_mode == 'dark' ? 'text-white' : 'text-black'}} text-xl font-normal mb-5">{{$quote->quote}}</div>
 
@@ -152,6 +152,17 @@
 
           {{-- JS Code --}}
           <script>
+
+            // Testing the select input
+                function select_personality_change(selected_item){
+                    alert('Selected: ' + selected_item.value);
+
+                    Livewire.dispatch('select_personality_based_data_change' , {personality: selected_item.value})
+
+                }
+
+
+
             // ***Delete Quote Form Pop-up Script
                     // function deleteQuote(id) {
                     //     console.log(Livewire.dispatchTo);

@@ -22,12 +22,32 @@ class InputIntoQuotesDatabase extends Component
     }
 
 
+
+    // Restarting Purpose method
     #[On('restart')]
     public function restart(){
 
         // It's just for rerendering this component's purpose
 
+
      }
+
+
+
+     // Select Personality Type method Data changing purpose
+     #[On('select_personality_based_data_change')]
+     public function select_personality_based_data_change($personality){
+
+        $this->personality = $personality;
+
+        session()->flash('message', 'The selecting change function occured' . $personality . $this->personality);
+
+        $this->database_files_personality_quote_single_type = DB::select('SELECT * FROM personality_type_based_quotes WHERE personality_type_identifier_int = ? ORDER BY id DESC', [intval($this->personality)]);
+     }
+
+
+
+
 
 
 
