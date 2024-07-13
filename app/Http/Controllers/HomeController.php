@@ -19,7 +19,7 @@ class HomeController extends Controller{
         $personality = $personality_query ? $personality_query[0]->personality_string : null;
 
 
-        return view('home' , ['personality' => $personality]);
+        return view('home' , ['personality' => $personality , 'theme_mode' => session('theme_mode') ?? 'light']);
     }
 }
 
