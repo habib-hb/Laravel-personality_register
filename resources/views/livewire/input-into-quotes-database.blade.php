@@ -13,11 +13,11 @@
                     <label id="select_label" for="personality" class="text-left {{$theme_mode == 'dark' ? 'text-white' : 'text-black'}}">Select The Personality Type:</label>
                 </div>
                 <select wire:model="personality" onchange="select_personality_change(this)" name="personality" id="section_input" class="w-[90vw] border-none rounded-md md:max-w-[500px] {{$theme_mode == 'dark' ? 'bg-input_dark_mode text-white' : ''}}">
-                    <option id="option-1" value="1" class="text-black {{$theme_mode == 'dark' ? 'text-white' : ''}}">Extroversion</option>
-                    <option id="option-2" value="2" class="text-black {{$theme_mode == 'dark' ? 'text-white' : ''}}">Agreeableness</option>
-                    <option id="option-3" value="3" class="text-black {{$theme_mode == 'dark' ? 'text-white' : ''}}">Openness</option>
-                    <option id="option-4" value="4" class="text-black {{$theme_mode == 'dark' ? 'text-white' : ''}}">Conscientiousness</option>
-                    <option id="option-5" value="5" class="text-black {{$theme_mode == 'dark' ? 'text-white' : ''}}">Neuroticism</option>
+                    <option {{$personality == '1' ? 'selected' : ''}} id="option-1" value="1" class="text-black {{$theme_mode == 'dark' ? 'text-white' : ''}}">Extroversion</option>
+                    <option {{$personality == '2' ? 'selected' : ''}}  id="option-2" value="2" class="text-black {{$theme_mode == 'dark' ? 'text-white' : ''}}">Agreeableness</option>
+                    <option {{$personality == '3' ? 'selected' : ''}} id="option-3" value="3" class="text-black {{$theme_mode == 'dark' ? 'text-white' : ''}}">Openness</option>
+                    <option  {{$personality == '4' ? 'selected' : ''}} id="option-4" value="4" class="text-black {{$theme_mode == 'dark' ? 'text-white' : ''}}">Conscientiousness</option>
+                    <option {{$personality == '5' ? 'selected' : ''}} id="option-5" value="5" class="text-black {{$theme_mode == 'dark' ? 'text-white' : ''}}">Neuroticism</option>
                 </select>
                 @error('personality')
                 <span class="text-red-500 text-sm">{{ $message }}</span>
@@ -47,10 +47,18 @@
 
 
             {{-- Session Message --}}
-            <h2 id="session-message" class="{{$theme_mode == 'dark' ? 'text-dark_mode_blue' : 'text-light_mode_blue' }} text-center text-[16px] font-normal font-['Inter'] mt-[2vh]">
+            <h2 id="session-message" class="flex flex-col items-center justify-center w-full {{$theme_mode == 'dark' ? 'text-dark_mode_blue bg-teal-300'  : 'text-light_mode_blue bg-teal-400' }} text-center font-normal font-['Inter'] mt-[2vh]  fixed top-4 z-10">
 
                 @if (session()->has('message'))
-                    {{ session('message') }}
+
+                    <span class='p-5'>
+
+                        <span class='text-[16px] underline'>Notification</span><br>
+
+                        <span class='text-[24px]'>{{ session('message') }}</span>
+
+                    </span>
+
                 @endif
 
             </h2>
@@ -58,7 +66,7 @@
 
 
         {{-- The Quote List --}}
-        <h2 id="quote_list_title" class="{{$theme_mode == 'dark' ? 'text-dark_mode_blue' : 'text-light_mode_blue' }} text-center text-[24px] font-normal font-['Inter'] mb-[2vh]">Quote List</h2>
+        <h2 id="quote_list_title" class="{{$theme_mode == 'dark' ? 'text-dark_mode_blue' : 'text-light_mode_blue' }} text-center text-[24px] font-normal font-['Inter'] mb-[2vh]">{{$current_personality_name}} Quote List</h2>
 
         <div class="flex flex-col gap-4 justify-center items-center mb-4">
 
@@ -153,9 +161,8 @@
           {{-- JS Code --}}
           <script>
 
-            // Testing the select input
+            // Changing Quotelist Data based on select personality type input change
                 function select_personality_change(selected_item){
-                    alert('Selected: ' + selected_item.value);
 
                     Livewire.dispatch('select_personality_based_data_change' , {personality: selected_item.value})
 

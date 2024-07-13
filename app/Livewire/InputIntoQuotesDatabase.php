@@ -8,7 +8,14 @@ use Livewire\Component;
 
 class InputIntoQuotesDatabase extends Component
 {
-    public $personality = '1'; // It's getting modeled from the input field in the livewire view
+    public $personality = '1'; // It's getting modeled from the select input field in the livewire view
+
+    public $personality_list = [
+        '1' => 'Extrovertion',
+        '2' => 'Agreeableness',
+        '3' => 'Openness',
+        '4' => 'Conscientiousness',
+        '5' => 'Neuroticism',];
 
     public $quote_input;
 
@@ -40,8 +47,6 @@ class InputIntoQuotesDatabase extends Component
 
         $this->personality = $personality;
 
-        session()->flash('message', 'The selecting change function occured' . $personality . $this->personality);
-
         $this->database_files_personality_quote_single_type = DB::select('SELECT * FROM personality_type_based_quotes WHERE personality_type_identifier_int = ? ORDER BY id DESC', [intval($this->personality)]);
      }
 
@@ -62,7 +67,7 @@ class InputIntoQuotesDatabase extends Component
 
         DB::insert('INSERT INTO personality_type_based_quotes (personality_type_identifier_int , quote) VALUES (?, ?)' , [intval($this->personality) , $this->quote_input]);
 
-        session()->flash('message', 'Your Quote has been saved successfully.');
+        session()->flash('message', 'Your Quote has been saved successfully. ' . $this->personality_list[$this->personality] . ' personality type : "' . $this->quote_input . '"');
 
         // Reset form fields
         $this->quote_input = null;
@@ -98,7 +103,7 @@ class InputIntoQuotesDatabase extends Component
             DB::update('UPDATE personality_type_based_quotes SET quote = ? WHERE id = ?', [$quote , $id]);
 
             // Sending a flash message
-            session()->flash('message', 'Quote updated successfully. id = ' . $id . ' quote = ' . $quote);
+            session()->flash('message', 'Quote updated successfully.' . ' New Quote : "' . $quote . '"');
 
             // Restating the Quote List
             $this->database_files_personality_quote_single_type = DB::select('SELECT * FROM personality_type_based_quotes WHERE personality_type_identifier_int = ? ORDER BY id DESC', [intval($this->personality)]);
@@ -112,6 +117,7 @@ class InputIntoQuotesDatabase extends Component
 
     public function render()
     {
-        return view('livewire.input-into-quotes-database' , ['theme_mode' => session('theme_mode') ?? 'light']);
+        return view('livewire.input-into-quotes-database' , ['theme_mode' => session('theme_mode') ?? 'light',
+        'current_personality_name' => $this->personality_list[$this->personality]]);
     }
 }
