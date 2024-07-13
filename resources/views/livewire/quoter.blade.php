@@ -11,7 +11,12 @@
     {{-- The Repeat Magic Button --}}
     <div class="flex flex-col justify-center items-center">
 
-    <button id="repeat_magic_button" wire:click="quoteHunter" class="bg-[#222222] rounded-lg text-white mt-4 w-[200px] py-1 hover:opacity-90">Repeat The Magic</button>
+         <button id="repeat_magic_button" wire:click="quoteHunter" class="bg-[#222222] rounded-lg text-white mt-4 w-[200px] py-1 hover:opacity-90">Repeat The Magic</button>
+
+         {{-- Disabled version of the button above --}}
+         <button id="repeat_magic_button_disabled" class="bg-[#222222] rounded-lg text-white mt-4 w-[200px] py-1 hover:opacity-90 hidden">Repeat The Magic</button>
+
+
 
     </div>
 
@@ -26,6 +31,15 @@
 
         <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
         <script>
+            // Limiting the repeated clicks of the repeat magic button
+            document.getElementById("repeat_magic_button").addEventListener("click", function() {
+
+                document.getElementById("repeat_magic_button_disabled").classList.toggle("hidden");
+                document.getElementById("repeat_magic_button").classList.toggle("hidden");
+
+            })
+
+
 
             const text_colors = [
                 "#007BFF",

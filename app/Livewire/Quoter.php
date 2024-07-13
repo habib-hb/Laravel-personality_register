@@ -50,7 +50,7 @@ class Quoter extends Component
     public function render()
     {
 
-        return view('livewire.quoter' , ['current_quote' => $this->current_quote, 'current_session_int' => $this->current_session_int , 'total_quotes' => count($this->database_files) ]);
+        return view('livewire.quoter' , ['current_quote' => $this->current_quote, 'current_session_int' => $this->current_session_int , 'total_quotes' => count($this->database_files) , 'is_hidden' => 'no' ]);
 
     }
 }

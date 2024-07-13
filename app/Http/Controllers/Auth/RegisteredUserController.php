@@ -19,7 +19,7 @@ class RegisteredUserController extends Controller
 
 public function create(): View
     {
-        return view('register-user');
+        return view('register-user' , ['theme_mode' => session('theme_mode') ?? 'light']);
     }
 
     /**
@@ -37,7 +37,7 @@ public function create(): View
             'personality' => ['required', 'numeric'],//my code ***
         ]);
 
-        
+
 
         $user = User::create([
             'name' => $request->name,
