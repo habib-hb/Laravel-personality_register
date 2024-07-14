@@ -1,15 +1,15 @@
-<nav x-data="{ open: false }" id="profile_nav" class="bg-white  border-b border-gray-100 ">
+<nav x-data="{ open: false }" id="profile_nav" class="bg-slate-50   ">
         {{-- dark:bg-gray-800 dark:border-gray-700 --}}
     <!-- Primary Navigation Menu -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between h-16">
-            <div class="flex">
+    <div class="max-w-full mx-auto px-4 sm:px-6 lg:px-8" style="box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);">
+        <div class="flex justify-end h-16">
+                <div class="absolute top-2 left-0 right-0 w-full ">
                 <!-- Logo -->
-                <div class=" flex items-center">
+                <div class=" flex items-center justify-center w-full">
 
                         {{-- <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" /> --}}
 
-                        <img id="dark_mode_logo" class="cursor-pointer" src="{{ asset('files/images/dark_mode_logo.png') }}" width="88px" alt="Pic">
+                        <img id="dark_mode_logo" class="cursor-pointer hidden" src="{{ asset('files/images/dark_mode_logo.png') }}" width="88px" alt="Pic">
 
                         <img id="light_mode_logo" class="cursor-pointer" src="{{ asset('files/images/light_mode_logo.png') }}" width="88px" alt="Pic">
 
@@ -86,7 +86,7 @@
                 {{-- dark:text-gray-200 --}}
 
                 <div id="profile_dropdown_mobile_email" class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
-                
+
             </div>
 
             <div class="mt-3 space-y-1">

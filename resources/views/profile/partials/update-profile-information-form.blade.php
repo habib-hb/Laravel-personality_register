@@ -20,19 +20,20 @@
         @method('patch')
 
         <div>
-            <x-input-label for="name" :value="__('Name')" />
+            <x-input-label id="profile_name_label" class="text-black" for="name" :value="__('Name')" />
             <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)" required autofocus autocomplete="name" />
             <x-input-error class="mt-2" :messages="$errors->get('name')" />
         </div>
 
         <div>
-            <x-input-label for="email" :value="__('Email')" />
+            <x-input-label id="profile_email_label" for="email" class="text-black" :value="__('Email')" />
             <x-text-input id="email" name="email" type="email" class="mt-1 block w-full" :value="old('email', $user->email)" required autocomplete="username" />
             <x-input-error class="mt-2" :messages="$errors->get('email')" />
 
             @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && ! $user->hasVerifiedEmail())
                 <div>
-                    <p class="text-sm mt-2 text-gray-800 dark:text-gray-200">
+                    <p id="profile_unverified_status_message" class="text-sm mt-2 text-gray-800 ">
+                        {{-- dark:text-gray-200 --}}
                         {{ __('Your email address is unverified.') }}
 
                         <button id="profile_send_verification_email_button" form="send-verification" class="underline text-sm text-gray-600  hover:text-gray-900  rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 ">
@@ -52,7 +53,7 @@
         </div>
 
         <div class="flex items-center gap-4">
-            <x-primary-button>{{ __('Save') }}</x-primary-button>
+            <button id="profile_information_save_button" class="bg-light_mode_blue hover:opacity-90 text-white font-bold py-2 px-4 rounded" type="submit">{{ __('Save') }}</button>
 
             @if (session('status') === 'profile-updated')
                 <p
