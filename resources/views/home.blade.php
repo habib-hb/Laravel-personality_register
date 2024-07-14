@@ -33,6 +33,30 @@
 
 
 
+        {{-- Profile/ Settings Button --}}
+        @auth
+
+            <div id="profile_icons_div" class="flex flex-col justify-center items-center absolute top-[14px] right-[16px]">
+
+
+                    <img id="light_mode_profile_icon" class="cursor-pointer" src="{{ asset('files/images/light_mode_profile_icon.png') }}" width = "39px" alt="">
+
+
+
+                    <img id="dark_mode_profile_icon" class="cursor-pointer hidden" src="{{ asset('files/images/dark_mode_profile_icon.png') }}" width = "39px" alt="">
+
+
+            </div>
+
+
+
+            {{-- The profile Popup window after clicking on profile --}}
+                @include('layouts.profile_popup')
+
+        @endauth
+
+
+
        @auth
 
                 {{-- When User Is coming from 'Register' Page --}}
@@ -206,6 +230,10 @@
                     document.querySelector('nav').classList.toggle('bg-slate-50');
                     document.querySelector('nav').classList.toggle('bg-dark_gray');
 
+                    // Profile/ Settings Button dark mode
+                    document.getElementById('dark_mode_profile_icon').classList.toggle('hidden');
+                    document.getElementById('light_mode_profile_icon').classList.toggle('hidden');
+
 
 
                     // Welcome text dark mode
@@ -242,6 +270,35 @@
 
 
             })
+
+
+
+            // Profile button click operation
+                document.getElementById('profile_icons_div').addEventListener('click', ()=>{
+
+                    let profile_popup = document.getElementById('profile_popup');
+                    profile_popup.classList.remove('hidden');
+
+                    // Trigger a reflow, flushing the CSS changes
+                    profile_popup.offsetHeight;
+                    profile_popup.classList.remove('opacity-0');
+                    profile_popup.classList.add('opacity-100');
+
+                });
+
+            // profile_popup_close_btn click operation
+                    document.getElementById('profile_popup_close_btn').addEventListener('click', ()=>{
+                        let profile_popup = document.getElementById('profile_popup');
+
+                        profile_popup.classList.remove('opacity-100');
+
+                        profile_popup.classList.add('opacity-0');
+
+                            // After a short delay, toggling the 'hidden' class
+                            setTimeout(() => {
+                                profile_popup.classList.add('hidden');
+                            }, 700);
+                         });
 
     </script>
 
