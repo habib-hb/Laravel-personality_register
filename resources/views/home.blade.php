@@ -231,8 +231,8 @@
                     document.querySelector('nav').classList.toggle('bg-dark_gray');
 
                     // Profile/ Settings Button dark mode
-                    document.getElementById('dark_mode_profile_icon').classList.toggle('hidden');
-                    document.getElementById('light_mode_profile_icon').classList.toggle('hidden');
+                    document.getElementById('dark_mode_profile_icon')?.classList.toggle('hidden');
+                    document.getElementById('light_mode_profile_icon')?.classList.toggle('hidden');
 
 
 
@@ -274,7 +274,7 @@
 
 
             // Profile button click operation
-                document.getElementById('profile_icons_div').addEventListener('click', ()=>{
+                document.getElementById('profile_icons_div')?.addEventListener('click', ()=>{
 
                     let profile_popup = document.getElementById('profile_popup');
                     profile_popup.classList.remove('hidden');
@@ -287,7 +287,7 @@
                 });
 
             // profile_popup_close_btn click operation
-                    document.getElementById('profile_popup_close_btn').addEventListener('click', ()=>{
+                    document.getElementById('profile_popup_close_btn')?.addEventListener('click', ()=>{
                         let profile_popup = document.getElementById('profile_popup');
 
                         profile_popup.classList.remove('opacity-100');

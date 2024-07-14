@@ -49,10 +49,10 @@ class AuthenticatedSessionController extends Controller
 
             // *** Laravel DB method didn't work, thus I had to use PDO ***
               // Database configuration
-            $host = '127.0.0.1';
-            $db = 'personality_register';
-            $user = 'root';
-            $pass = '';
+            $host = env('DB_HOST', '127.0.0.1');
+            $db = env('DB_DATABASE', 'personality_register');
+            $user = env('DB_USERNAME', 'root');
+            $pass = env('DB_PASSWORD', '');
             // $charset = 'utf8mb4';
 
             $dsn = "mysql:host=$host;dbname=$db;";
