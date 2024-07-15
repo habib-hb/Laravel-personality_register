@@ -10,6 +10,7 @@ class Quoter extends Component
     public $database_files = [];
     public $current_quote = "Starter";
     public $current_session_int;
+    public $treasure_theme_mode = 'dark';
 
 
     // Initial $current_quote setup
@@ -17,6 +18,10 @@ class Quoter extends Component
         $this->quoteHunter();
 
         // $this->current_quote = $this->database_files[0]->quote ; // isset($_SESSION['current_quote_int']) ? $this->database_files[$_SESSION['current_quote_int']]->quote :
+    }
+
+    public function change_treasure_theme_mode(){
+        $this->treasure_theme_mode == 'light' ? $this->treasure_theme_mode = 'dark' : $this->treasure_theme_mode = 'light';
     }
 
 
@@ -50,7 +55,7 @@ class Quoter extends Component
     public function render()
     {
 
-        return view('livewire.quoter' , ['current_quote' => $this->current_quote, 'current_session_int' => $this->current_session_int , 'total_quotes' => count($this->database_files) , 'is_hidden' => 'no' ]);
+        return view('livewire.quoter' , ['current_quote' => $this->current_quote, 'current_session_int' => $this->current_session_int , 'total_quotes' => count($this->database_files) , 'is_hidden' => 'no' , 'treasure_theme_mode' => $this->treasure_theme_mode ]);
 
     }
 }

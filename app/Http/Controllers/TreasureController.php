@@ -14,7 +14,7 @@ class TreasureController extends Controller {
 
         // session_start();
 
-        // isset($_SESSION['current_quote_int']) ? 
+        // isset($_SESSION['current_quote_int']) ?
         // // When Session Exists
         // $_SESSION['current_quote_int'] == 9 ?
         // $_SESSION['current_quote_int'] = 0 :

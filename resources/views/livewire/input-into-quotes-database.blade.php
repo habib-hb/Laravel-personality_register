@@ -77,11 +77,11 @@
 
                     <div class="quote_list_element_text text-center {{$theme_mode == 'dark' ? 'text-white' : 'text-black'}} text-xl font-normal mb-5">{{$quote->quote}}</div>
 
-                    <div class="flex justify-between">
+                    <div class="flex justify-between md:justify-center md:gap-8">
 
-                        <button class="quote_list_element_edit_button w-[35vw] h-[6vh] {{$theme_mode == 'dark' ? 'bg-dark_mode_blue' : 'bg-light_mode_blue'}} rounded-lg text-white text-xl font-normal flex items-center justify-center" onclick="edit_quote({{$quote->id}} , `{{$quote->quote}}`)">Edit</button>
+                        <button class="quote_list_element_edit_button w-[35vw] md:w-[200px] h-[6vh] {{$theme_mode == 'dark' ? 'bg-dark_mode_blue' : 'bg-light_mode_blue'}} rounded-lg text-white text-xl font-normal flex items-center justify-center" onclick="edit_quote({{$quote->id}} , `{{$quote->quote}}`)">Edit</button>
 
-                        <button class="quote_list_element_delete_button w-[35vw] h-[6vh] {{$theme_mode == 'dark' ? 'bg-dark_mode_red' : 'bg-light_mode_red'}} rounded-lg text-white text-xl font-normal flex items-center justify-center" onclick="delete_quote({{$quote->id}} , `{{$quote->quote}}`)">Delete</button>
+                        <button class="quote_list_element_delete_button w-[35vw] md:w-[200px]  h-[6vh] {{$theme_mode == 'dark' ? 'bg-dark_mode_red' : 'bg-light_mode_red'}} rounded-lg text-white text-xl font-normal flex items-center justify-center" onclick="delete_quote({{$quote->id}} , `{{$quote->quote}}`)">Delete</button>
                         {{--  wire:click="deleteQuote({{$quote->id}})" --}}
 
                     </div>

@@ -15,6 +15,6 @@
         <a href="/login" class="block my-2 text-2xl hover:text-3xl">Log In</a>
         <a href="/register" class="block my-2 text-2xl hover:text-3xl">Register</a>
         <a href="/change_personality" class="block my-2 text-2xl hover:text-3xl">Change Personality</a>
-        <a href="#" class="block my-2 text-2xl mt-36 hover:text-3xl">About</a>
+        <a href="/about" class="block my-2 text-2xl mt-36 hover:text-3xl">About</a>
     </div>
 </div>
