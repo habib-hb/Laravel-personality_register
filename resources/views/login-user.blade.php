@@ -61,7 +61,7 @@
 
             {{-- Email input --}}
             <div class="flex flex-col self-center w-full max-w-[90vw] mt-4 md:mt-2 md:max-w-[500px]">
-                <label id="email_input_label" for="email" class="text-left">Email:</label>
+                <label id="email_input_label" for="email_input" class="text-left">Email:</label>
             </div>
             <input type="email" id="email_input" name="email" class="w-[90vw] border-none rounded-md md:mt-2 md:max-w-[500px]">
             @error('email')
