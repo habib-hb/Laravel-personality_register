@@ -1,6 +1,6 @@
 <div id="profile_popup" class="absolute top-0 h-full w-full bg-black hidden opacity-0 transition-opacity duration-700 ease-in-out">
     <!-- Close Button -->
-    <div id="profile_popup_close_btn" class="close-btn absolute top-4 right-4 text-white cursor-pointer text-6xl">&times;</div>
+    <div id="profile_popup_close_btn" class="close-btn absolute top-4 right-4 text-white cursor-pointer text-6xl hover:scale-125">&times;</div>
 
     <!-- Profile Details -->
     <div class="text-center text-white mt-[20vh]">

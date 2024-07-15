@@ -36,7 +36,7 @@
         {{-- Profile/ Settings Button --}}
         @auth
 
-            <div id="profile_icons_div" class="flex flex-col justify-center items-center absolute top-[14px] right-[16px]">
+            <div id="profile_icons_div" class="flex flex-col justify-center items-center absolute top-[14px] right-[16px] hover:opacity-70">
 
 
                     <img id="light_mode_profile_icon" class="cursor-pointer" src="{{ asset('files/images/light_mode_profile_icon.png') }}" width = "39px" alt="">
