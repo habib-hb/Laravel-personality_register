@@ -131,4 +131,29 @@ Route::post('/set_theme_mode' , function (Request $request) {
 })->name('set_theme_mode');
 
 
+
+// Change personality Setup
+Route::get('/change_personality' , function () {
+    return view('database_input.change_personality');
+})->name('change_personality')->middleware('auth');
+
+Route::post('/change_personality' , function (Request $request) {
+    $user_id = Auth::user()->id;
+
+    // Updating the exisiting personality type store
+    DB::update('UPDATE personality_type_store SET personality_type_identifier_int = ? WHERE user_id = ?', [intval($request->personality) , $user_id]);
+
+    // Redirecting to the home page
+    return redirect(route('home'));
+});
+
+
+
+// About Page
+Route::get('/about' , function () {
+    return view('about', ['theme_mode' => session('theme_mode') ?? 'light']);
+})->name('about');
+
+
+
 require __DIR__.'/auth.php';

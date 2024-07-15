@@ -36,51 +36,10 @@
 
 
         {{-- Opening Message --}}
-        <h2 id="first_message" class="text-light_mode_blue text-center text-[32px] font-normal font-['Inter'] mt-[4vh]">Let’s Log In :)</h2>
+        <h2 id="first_message" class="text-light_mode_blue text-center text-[32px] font-normal font-['Inter'] mt-[4vh]">About</h2>
 
 
 
-        {{-- The Github Button --}}
-        <div class="flex flex-col justify-center items-center mt-[4vh]">
-
-            <a href="auth/redirect" class="cursor-pointer flex flex-col items-center">
-                <img src="{{ asset('files/images/github_button.png') }}" alt="Github logo" class="cursor-pointer hover:opacity-80 w-[94%] md:w-[300px]">
-            </a>
-
-        </div>
-        {{-- Hr Line --}}
-        <hr id="hr_line" class="bg-black mt-[4vh] md:h-[2px]">
-
-
-
-    {{-- Form Starts- 5 inputs (section select with 5 options, name , email, password, confirm password) --}}
-    <form action="{{ route('login') }}" method="POST" class="w-full flex flex-col justify-center items-center mt-8 transition-all md:mt-2">
-
-        {{-- CSRF Protected --}}
-        @csrf
-
-            {{-- Email input --}}
-            <div class="flex flex-col self-center w-full max-w-[90vw] mt-4 md:mt-2 md:max-w-[500px]">
-                <label id="email_input_label" for="email" class="text-left">Email:</label>
-            </div>
-            <input type="email" id="email_input" name="email" class="w-[90vw] border-none rounded-md md:mt-2 md:max-w-[500px]">
-            @error('email')
-            <span class="text-red-500 text-sm">{{ $message }}</span>
-            @enderror
-
-            {{-- Password input --}}
-            <div class="flex flex-col self-center w-full max-w-[90vw] mt-4 md:mt-2 md:max-w-[500px]">
-                <label id="password_input_label" for="password" class="text-left">Password:</label>
-            </div>
-            <input type="password" id="password_input" name="password" class="w-[90vw] border-none rounded-md md:mt-2 md:max-w-[500px]">
-            @error('password')
-            <span class="text-red-500 text-sm">{{ $message }}</span>
-            @enderror
-
-            {{-- Log In button --}}
-            <input type="submit" id="submit_button" value="Log In" class="mt-[4vh] mb-[4vh] h-12 w-[90%] rounded-md bg-light_mode_blue text-white hover:opacity-90 text-xl md:max-w-[350px] md:mb-[12vh]">
-
-        </form>
 
 
 
@@ -125,8 +84,8 @@
                                     .then(data => {
                                             console.log('set_theme_mode console response: ', data);
 
-                                            // Restarting the livewire component
-                                            Livewire.dispatch('restart');
+                                            // // Restarting the livewire component
+                                            // Livewire.dispatch('restart');
                                         })
                                         .catch(error => {
                                             console.log('set_theme_mode console error: ', error);
@@ -175,35 +134,6 @@
                 document.getElementById('first_message').classList.toggle('text-dark_mode_blue');
                 document.getElementById('first_message').classList.toggle('text-light_mode_blue');
 
-
-
-                // Hr Line dark mode
-                document.getElementById('hr_line').classList.toggle('bg-black');
-                document.getElementById('hr_line').classList.toggle('bg-white');
-
-
-
-                // Input labels dark mode
-                document.getElementById('email_input_label').classList.toggle('text-white');
-                document.getElementById('password_input_label').classList.toggle('text-white');
-
-
-
-                // Email input dark mode
-                document.getElementById('email_input').classList.toggle('bg-input_dark_mode');
-                document.getElementById('email_input').classList.toggle('text-white');
-
-
-
-                // Password input dark mode
-                document.getElementById('password_input').classList.toggle('bg-input_dark_mode');
-                document.getElementById('password_input').classList.toggle('text-white');
-
-
-
-                // Submit button dark mode
-                document.getElementById('submit_button').classList.toggle('bg-dark_mode_blue');
-                document.getElementById('submit_button').classList.toggle('bg-light_mode_blue');
 
 
 

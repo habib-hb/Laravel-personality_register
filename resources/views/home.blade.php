@@ -136,7 +136,7 @@
 
                 <h2 id="user_name" class="mt-[3vh] text-center font-medium text-4xl text-light_mode_blue md:mt-[3vh]">Welcome</h2>
 
-                <p id="personality_text" class="mt-[4vh] text-center font-medium text-lg md:mt-[4vh] px-4">Seems like you haven’t Registered yet! Please click the link below to see the magic :)</p>
+                <p id="personality_text" class="mt-[4vh] text-center font-medium text-lg md:mt-[4vh] px-4">Seems like you haven’t Registered yet!<br> Please click the link below to see the magic :)</p>
 
                 <a href="/register">
 
