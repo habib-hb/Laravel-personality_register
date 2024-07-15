@@ -48,5 +48,7 @@
 
 
 {{-- Javascript Codes are written on the layouts/app.blade.php file --}}
+   
+
 
 </x-app-layout>

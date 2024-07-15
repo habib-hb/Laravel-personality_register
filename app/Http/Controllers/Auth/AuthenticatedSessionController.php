@@ -139,7 +139,7 @@ class AuthenticatedSessionController extends Controller
     public function destroy(Request $request): RedirectResponse
     {
        // Deleting the user from database
-        DB::delete('DELETE FROM users where id = ?', [Auth::user()->id]);
+        // DB::delete('DELETE FROM users where id = ?', [Auth::user()->id]);
 
         Auth::guard('web')->logout();
 

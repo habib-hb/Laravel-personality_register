@@ -18,6 +18,7 @@ class ProfileController extends Controller
     {
         return view('profile.edit', [
             'user' => $request->user(),
+            'theme_mode' => session('theme_mode') ?? 'light'
         ]);
     }
 

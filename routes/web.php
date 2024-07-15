@@ -156,4 +156,28 @@ Route::get('/about' , function () {
 
 
 
+// Feedback message
+Route::post('feedback', function(Request $request) {
+    $data = $request->validate([
+        'feedback' => 'required',
+    ]);
+    $data['created_at'] = date('Y-m-d H:i:s');
+
+    if (Auth::check()) {
+        $data['user_id'] = Auth::user()->id;
+    }
+
+    if(Auth::check()) {
+    DB::insert('INSERT INTO feedback_message (user_id ,feedback, created_at) VALUES (?,?,?)' , [$data['user_id'] ?? null , $data['feedback'] , $data['created_at']]);
+    } else {
+        DB::insert('INSERT INTO feedback_message (feedback, created_at) VALUES (?,?)' , [$data['feedback'] , $data['created_at']]);
+    }
+
+    // Return redirect back
+    return redirect()->back();
+
+})->name('feedback');
+
+
+
 require __DIR__.'/auth.php';

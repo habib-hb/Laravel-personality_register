@@ -38,8 +38,51 @@
 
         {{-- *** JAVASCRIPT CODE *** --}}
         <script>
-            // Dark/light mode toggle button click operation
-            document.getElementById('dark_mode_toggle_button').addEventListener('click', function() {
+            // Managing the dark mode from Backend php/Laravel Session
+            document.addEventListener('DOMContentLoaded', function() {
+                if(@json(session('theme_mode')) == 'dark'){
+
+                    // Clicking the theme toggle button artificially
+                    document.getElementById('dark_mode_toggle_button').click();
+
+                     }
+                else {
+                    first_load_check = false;
+                }
+                });
+
+
+
+            // Dark mode toggle button operation
+                let first_load_check = true;
+            document.querySelector('#dark_mode_toggle_button').addEventListener('click', async()=>{
+
+                    // Setting theme mode session based on user click through api post request
+                         // Fetch POST request
+                    !first_load_check && await fetch('{{ route('set_theme_mode') }}', {
+                                        method: 'POST',
+                                        headers: {
+                                            'Content-Type': 'application/json',
+                                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                                        },
+                                        body: JSON.stringify({
+                                            theme_mode: @json(session('theme_mode')) == 'dark' ? 'light' : 'dark'
+
+                                        })
+                                    }).then(response => response.text())
+                                    .then(data => {
+                                            console.log('set_theme_mode console response: ', data);
+
+                                            // Restarting the livewire component
+                                            Livewire.dispatch('restart');
+                                        })
+                                        .catch(error => {
+                                            console.log('set_theme_mode console error: ', error);
+                                        });
+
+                     first_load_check = false;
+
+
 
             // Toggle Logo dark/light mode icons
             document.getElementById('light_mode_logo').classList.toggle('hidden');

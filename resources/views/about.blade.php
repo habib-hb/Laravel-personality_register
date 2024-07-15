@@ -46,7 +46,7 @@
 
 
         {{-- The feedback form --}}
-        <form action="{{ route('login') }}" method="POST" class="w-full flex flex-col justify-center items-center mt-8 transition-all md:mt-2">
+        <form action="{{ route('feedback') }}" method="POST" class="w-full flex flex-col justify-center items-center mt-8 transition-all md:mt-2">
 
             {{-- CSRF Protected --}}
             @csrf
@@ -55,7 +55,7 @@
                 <div class="flex flex-col self-center w-full max-w-[90vw] mt-4 md:mt-2 md:max-w-[500px]">
                     <label id="feedback_input_label" for="feedback_input" class="text-center">Feedback</label>
                 </div>
-                <textarea id="feedback_input" name="feedback_input" class="w-[90vw] border-none rounded-md md:mt-2 md:max-w-[500px]"></textarea>
+                <textarea id="feedback_input" name="feedback" class="w-[90vw] border-none rounded-md md:mt-2 md:max-w-[500px]"></textarea>
                 @error('feedback_input')
                 <span class="text-red-500 text-sm">{{ $message }}</span>
                 @enderror
