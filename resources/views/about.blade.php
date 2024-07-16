@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <title>About</title>
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
@@ -75,10 +75,16 @@
                 <li>Laravel</li>
                 <li>Blade</li>
                 <li>Livewire</li>
+                <li>JavaScript</li>
                 <li>Tailwind</li>
                 <li>Vite</li>
                 <li>Git</li>
                 <li>Smtp</li>
+                <li>Apache</li>
+                <li>GPT 4</li>
+                <li>Codeium</li>
+                <li>Icon 8</li>
+                <li>Figma</li>
             </ul>
 
            <br><br><br><br><br><br><br><br>
